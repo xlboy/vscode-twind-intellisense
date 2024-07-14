@@ -1,18 +1,18 @@
 import { version } from '../package.json';
-import { Configurator } from './core/configurator';
+import { configurator } from './core/configurator';
 import { Controller } from './core/controller';
 import { logger } from './core/logger';
 import vscode from 'vscode';
 
 export function activate(vscodeContext: vscode.ExtensionContext) {
-  logger.appendLine(`Extension version: v${version}\n`);
+  logger.info(`Extension version: v${version}\n`);
 
-  const extensionConfig = Configurator.i.getExtensionConfig();
+  const extensionConfig = configurator.getExtensionConfig();
   if (!extensionConfig.enabled) {
-    logger.appendLine('Extension disabled, exiting...');
+    logger.info('Extension disabled, exiting...');
 
     return;
   }
 
-  new Controller();
+  new Controller(vscodeContext);
 }
