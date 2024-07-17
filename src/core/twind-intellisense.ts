@@ -26,9 +26,10 @@ class TwindIntellisense {
 
     try {
       const docCode = document.getText();
-      const positionOffset = getOffsetFromPosition(position, docCode);
 
+      const positionOffset = getOffsetFromPosition(position, docCode);
       if (positionOffset === undefined) return [];
+
       const suggestResult = await this._twindInstance.suggestAt(docCode, positionOffset, document.languageId);
       if (!suggestResult) {
         logger.error('Error while suggesting: suggestions is undefined');
@@ -45,6 +46,31 @@ class TwindIntellisense {
       logger.error('Error while suggesting:' + errMsg);
       return [];
     }
+  }
+
+  async hover(document: vscode.TextDocument, position: vscode.Position): Promise<vscode.Hover | undefined> {
+    if (!this._twindInstance) return;
+
+    try {
+      const docCode = document.getText();
+
+      const positionOffset = getOffsetFromPosition(position, docCode);
+      if (positionOffset === undefined) return;
+
+      const hoverResult = await this._twindInstance.documentationAt(docCode, positionOffset, document.languageId);
+      if (!hoverResult) return;
+
+      const currentHoverRange = new vscode.Range(
+        document.positionAt(hoverResult.start),
+        document.positionAt(hoverResult.end),
+      );
+      return new vscode.Hover(hoverResult.value, currentHoverRange);
+    } catch (error) {
+      const errMsg = error instanceof Error ? error.message : 'Unknown error';
+      logger.error('Error while hovering:' + errMsg);
+    }
+
+    return;
   }
 
   private _refreshTwindInstance() {
