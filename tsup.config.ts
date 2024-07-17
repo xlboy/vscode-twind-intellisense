@@ -4,5 +4,6 @@ export default defineConfig({
   entry: ['src/index.ts'],
   format: ['cjs'],
   external: ['vscode'],
-  sourcemap: true
+  sourcemap: true,
+  metafile: false
 });

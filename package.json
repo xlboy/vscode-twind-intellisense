@@ -3,8 +3,9 @@
   "publisher": "xlboy",
   "displayName": "Twind Intellisense (Phoenix)",
   "version": "0.1.0",
-  "description": "",
+  "description": "Twind Intellisense for VSCode, It's waiting for its king to return",
   "license": "MIT",
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "https://github.com/xlboy/vscode-twind-intellisense"
@@ -12,7 +13,7 @@
   "categories": [
     "Other"
   ],
-  "main": "./dist/index.js",
+  "main": "./dist/index.cjs",
   "icon": "res/logo.png",
   "files": [
     "dist/**/*",
@@ -27,13 +28,49 @@
     "onStartupFinished"
   ],
   "contributes": {
-    "commands": [],
-    "configuration": {},
-    "keybindings": []
+    "configuration": {
+      "type": "object",
+      "title": "Twind Intellisense (Phoenix)",
+      "properties": {
+        "twind-intellisense.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable this extension"
+        },
+        "twind-intellisense.presets": {
+          "type": "array",
+          "default": [
+            "tailwind"
+          ],
+          "items": {
+            "type": "string",
+            "enum": [
+              "tailwind",
+              "tailwind-forms",
+              "autoprefix",
+              "container-queries",
+              "line-clamp",
+              "radix-ui",
+              "typography"
+            ],
+            "markdownEnumDescriptions": [
+              "`@twind/preset-tailwind`",
+              "`@twind/preset-tailwind-forms`",
+              "`@twind/preset-autoprefix`",
+              "`@twind/preset-container-queries`",
+              "`@twind/preset-line-clamp`",
+              "`@twind/preset-radix-ui`",
+              "`@twind/preset-typography`"
+            ]
+          },
+          "description": "Preset configurations"
+        }
+      }
+    }
   },
   "scripts": {
     "clean": "rimraf node_modules",
-    "build": "run-s type-check test && tsup",
+    "build": "tsup",
     "dev": "tsup --watch src",
     "type-check": "tsc",
     "vsce-package": "run-s build && tsx scripts/vsce-package",
@@ -44,6 +81,13 @@
     "@tsconfig/node20": "^20.1.4",
     "@twind/core": "^1.1.3",
     "@twind/intellisense": "^1.1.3",
+    "@twind/preset-autoprefix": "^1.0.7",
+    "@twind/preset-container-queries": "^1.0.7",
+    "@twind/preset-line-clamp": "^1.0.7",
+    "@twind/preset-radix-ui": "^1.0.7",
+    "@twind/preset-tailwind": "^1.1.4",
+    "@twind/preset-tailwind-forms": "^1.1.2",
+    "@twind/preset-typography": "^1.0.7",
     "@types/fs-extra": "^11.0.1",
     "@types/lodash-es": "^4.17.7",
     "@types/vscode": "^1.70.0",
@@ -61,5 +105,15 @@
     "type-fest": "^4.21.0",
     "typescript": "^5.5.3",
     "unconfig": "^0.3.7"
+  },
+  "pnpm": {
+    "patchedDependencies": {
+      "@twind/core@1.1.3": "patches/@twind__core@1.1.3.patch",
+      "@twind/preset-tailwind@1.1.4": "patches/@twind__preset-tailwind@1.1.4.patch",
+      "@twind/intellisense@1.1.3": "patches/@twind__intellisense@1.1.3.patch",
+      "@twind/preset-container-queries@1.0.7": "patches/@twind__preset-container-queries@1.0.7.patch",
+      "@twind/preset-line-clamp@1.0.7": "patches/@twind__preset-line-clamp@1.0.7.patch",
+      "@twind/preset-typography@1.0.7": "patches/@twind__preset-typography@1.0.7.patch"
+    }
   }
 }

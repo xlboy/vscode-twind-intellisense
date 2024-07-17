@@ -1,0 +1,36 @@
+diff --git a/package.json b/package.json
+index 6bed44839d0dd0ff559ca7c7ffc01df86bd2ae83..e969c1c3d67788fedd4f758caac267a0c2a283b5 100644
+--- a/package.json
++++ b/package.json
+@@ -47,30 +47,7 @@
+   "exports": {
+     ".": {
+       "types": "./preset-typography.d.ts",
+-      "development": {
+-        "esnext": "./preset-typography.esnext.dev.js",
+-        "deno": "./preset-typography.deno.dev.js",
+-        "module": "./preset-typography.dev.js",
+-        "worker": "./preset-typography.worker.dev.js",
+-        "browser": "./preset-typography.browser.dev.js",
+-        "script": "./preset-typography.global.dev.js",
+-        "node": {
+-          "import": "./preset-typography.dev.mjs",
+-          "require": "./preset-typography.dev.cjs"
+-        },
+-        "default": "./preset-typography.dev.js"
+-      },
+-      "esnext": "./preset-typography.esnext.js",
+-      "deno": "./preset-typography.deno.js",
+-      "module": "./preset-typography.js",
+-      "worker": "./preset-typography.worker.js",
+-      "browser": "./preset-typography.browser.js",
+-      "script": "./preset-typography.global.js",
+-      "node": {
+-        "import": "./preset-typography.mjs",
+-        "require": "./preset-typography.cjs"
+-      },
+-      "default": "./preset-typography.js"
++      "default": "./preset-typography.dev.js"
+     },
+     "./package.json": "./package.json"
+   },

@@ -1,0 +1,51 @@
+diff --git a/package.json b/package.json
+index 283204bce96e101436e9c93fd01d868234dc97f8..9270df6eb4a716667c974b6e35dbd6ba9557cf5d 100644
+--- a/package.json
++++ b/package.json
+@@ -43,34 +43,10 @@
+   "engines": {
+     "node": ">=14.15.0"
+   },
+-  "main": "./preset-line-clamp.cjs",
+   "exports": {
+     ".": {
+       "types": "./preset-line-clamp.d.ts",
+-      "development": {
+-        "esnext": "./preset-line-clamp.esnext.dev.js",
+-        "deno": "./preset-line-clamp.deno.dev.js",
+-        "module": "./preset-line-clamp.dev.js",
+-        "worker": "./preset-line-clamp.worker.dev.js",
+-        "browser": "./preset-line-clamp.browser.dev.js",
+-        "script": "./preset-line-clamp.global.dev.js",
+-        "node": {
+-          "import": "./preset-line-clamp.dev.mjs",
+-          "require": "./preset-line-clamp.dev.cjs"
+-        },
+-        "default": "./preset-line-clamp.dev.js"
+-      },
+-      "esnext": "./preset-line-clamp.esnext.js",
+-      "deno": "./preset-line-clamp.deno.js",
+-      "module": "./preset-line-clamp.js",
+-      "worker": "./preset-line-clamp.worker.js",
+-      "browser": "./preset-line-clamp.browser.js",
+-      "script": "./preset-line-clamp.global.js",
+-      "node": {
+-        "import": "./preset-line-clamp.mjs",
+-        "require": "./preset-line-clamp.cjs"
+-      },
+-      "default": "./preset-line-clamp.js"
++      "default": "./preset-line-clamp.dev.js"
+     },
+     "./package.json": "./package.json"
+   },
+@@ -86,9 +62,5 @@
+   },
+   "publishConfig": {
+     "access": "public"
+-  },
+-  "module": "./preset-line-clamp.js",
+-  "unpkg": "./preset-line-clamp.global.js",
+-  "jsdelivr": "./preset-line-clamp.global.js",
+-  "types": "./preset-line-clamp.d.ts"
++  }
+ }

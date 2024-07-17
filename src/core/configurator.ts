@@ -1,36 +1,25 @@
 import { logger } from './logger';
-import type { TwindConfig } from '@twind/core';
+import type { ExtensionConfig } from './types';
+import type { TwindUserConfig } from '@twind/core';
 import { getRootPath } from '@vscode-use/utils';
 import { createConfigLoader } from 'unconfig';
 import vscode from 'vscode';
 
-interface ExtensionConfig {
-  /** @default true */
-  enabled: boolean;
-
-  /** @default ['tw', 'className', 'class'] */
-  attributes: string[];
-
-  /** @default `${workspaceFolder}` */
-  // rootPath: string;
-
-  /** @default `${workspaceFolder}/twind.config.js` */
-  // configPath: string;
-}
-
 class Configurator {
   private _extensionConfig!: ExtensionConfig;
-  private _twindUserConfig?: TwindConfig;
+  private _twindUserConfig?: TwindUserConfig;
   private _watchExtensionConfigCallbacks: Array<(config: ExtensionConfig) => void> = [];
-  private _watchTwindUserConfigCallbacks: Array<(config: TwindConfig) => void> = [];
+  private _watchTwindUserConfigCallbacks: Array<(config: TwindUserConfig) => void> = [];
 
   constructor() {
     this._syncExtensionConfig();
     this._syncTwindUserConfig();
 
     vscode.workspace.onDidChangeConfiguration(() => {
+      this._syncExtensionConfig();
       this._watchExtensionConfigCallbacks.forEach(cb => cb(this._extensionConfig));
     });
+    // TODO: TwindUserConfig 也可以监听一下哇
   }
 
   getExtensionConfig() {
@@ -45,23 +34,24 @@ class Configurator {
     this._watchExtensionConfigCallbacks.push(cb);
   }
 
-  onWatchTwindUserConfig(cb: (config: TwindConfig) => void) {
+  onWatchTwindUserConfig(cb: (config: TwindUserConfig) => void) {
     this._watchTwindUserConfigCallbacks.push(cb);
   }
 
   private _syncExtensionConfig() {
-    const config = vscode.workspace.getConfiguration('twind');
+    const config = vscode.workspace.getConfiguration('twind-intellisense');
 
     this._extensionConfig = {
       enabled: config.get('enabled', true),
-      attributes: config.get('attributes', ['tw', 'className', 'class']),
+      presets: config.get('presets', ['tailwind']),
+      // attributes: config.get('attributes', ['tw', 'className', 'class']),
       // rootPath: config.get('rootPath', ''),
       // configPath: config.get('configPath', ''),
     } satisfies ExtensionConfig;
   }
 
   private async _syncTwindUserConfig() {
-    const twindConfigLoader = createConfigLoader<TwindConfig>({
+    const twindConfigLoader = createConfigLoader<TwindUserConfig>({
       cwd: getRootPath(),
       defaults: {},
       sources: { files: 'twind.config' },
