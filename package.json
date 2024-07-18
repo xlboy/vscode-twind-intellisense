@@ -77,6 +77,7 @@
     "vsce-publish": "run-s build && tsx scripts/vsce-package --publish"
   },
   "devDependencies": {
+    "@ctrl/tinycolor": "^4.1.0",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "@tsconfig/node20": "^20.1.4",
     "@twind/core": "^1.1.3",

@@ -1,6 +1,7 @@
 import { configurator } from './configurator';
 import { logger } from './logger';
 import { TwindDefaultPreset } from './types';
+import { fromRatio, names as namedColors } from '@ctrl/tinycolor';
 import { type Preset } from '@twind/core';
 import { type Intellisense, type Suggestion, createIntellisense } from '@twind/intellisense';
 import presetAutoprefix from '@twind/preset-autoprefix';
@@ -13,6 +14,11 @@ import presetTypography from '@twind/preset-typography';
 import { getOffsetFromPosition } from '@vscode-use/utils';
 import vscode from 'vscode';
 
+type SuggestProvider = vscode.CompletionItemProvider['provideCompletionItems'];
+type HoverProvider = vscode.HoverProvider['provideHover'];
+type DocumentColorProvider = vscode.DocumentColorProvider['provideDocumentColors'];
+type DocumentColorEditProvider = vscode.DocumentColorProvider['provideColorPresentations'];
+
 class TwindIntellisense {
   private _twindInstance?: Intellisense;
 
@@ -21,24 +27,24 @@ class TwindIntellisense {
     configurator.onWatchExtensionConfig(this._refreshTwindInstance.bind(this));
   }
 
-  async suggest(document: vscode.TextDocument, position: vscode.Position): Promise<vscode.CompletionItem[]> {
+  suggestProvider: SuggestProvider = async (doc, position) => {
     if (!this._twindInstance) return [];
 
     try {
-      const docCode = document.getText();
+      const docCode = doc.getText();
 
       const positionOffset = getOffsetFromPosition(position, docCode);
       if (positionOffset === undefined) return [];
 
-      const suggestResult = await this._twindInstance.suggestAt(docCode, positionOffset, document.languageId);
+      const suggestResult = await this._twindInstance.suggestAt(docCode, positionOffset, doc.languageId);
       if (!suggestResult) {
         logger.error('Error while suggesting: suggestions is undefined');
         return [];
       }
 
       const currentInputRange = new vscode.Range(
-        document.positionAt(suggestResult.start),
-        document.positionAt(suggestResult.end),
+        doc.positionAt(suggestResult.start),
+        doc.positionAt(suggestResult.end),
       );
       return suggestResult.suggestions.map((s, i) => this._helpers.convertToCompletionItem(s, i, currentInputRange));
     } catch (error) {
@@ -46,24 +52,21 @@ class TwindIntellisense {
       logger.error('Error while suggesting:' + errMsg);
       return [];
     }
-  }
+  };
 
-  async hover(document: vscode.TextDocument, position: vscode.Position): Promise<vscode.Hover | undefined> {
+  hoverProvider: HoverProvider = async (doc, position) => {
     if (!this._twindInstance) return;
 
     try {
-      const docCode = document.getText();
+      const docCode = doc.getText();
 
       const positionOffset = getOffsetFromPosition(position, docCode);
       if (positionOffset === undefined) return;
 
-      const hoverResult = await this._twindInstance.documentationAt(docCode, positionOffset, document.languageId);
+      const hoverResult = await this._twindInstance.documentationAt(docCode, positionOffset, doc.languageId);
       if (!hoverResult) return;
 
-      const currentHoverRange = new vscode.Range(
-        document.positionAt(hoverResult.start),
-        document.positionAt(hoverResult.end),
-      );
+      const currentHoverRange = new vscode.Range(doc.positionAt(hoverResult.start), doc.positionAt(hoverResult.end));
       return new vscode.Hover(hoverResult.value, currentHoverRange);
     } catch (error) {
       const errMsg = error instanceof Error ? error.message : 'Unknown error';
@@ -71,7 +74,56 @@ class TwindIntellisense {
     }
 
     return;
-  }
+  };
+
+  documentColorProvider: DocumentColorProvider = async doc => {
+    if (!this._twindInstance) return [];
+
+    const colors = (await this._twindInstance.collectColors(doc.getText(), doc.languageId)) ?? [];
+
+    return colors.map(
+      c =>
+        new vscode.ColorInformation(
+          new vscode.Range(doc.positionAt(c.start), doc.positionAt(c.end)),
+          new vscode.Color(c.rgba.r / 255, c.rgba.g / 255, c.rgba.b / 255, c.rgba.a),
+        ),
+    );
+  };
+
+  documentColorEditProvider: DocumentColorEditProvider = async (color, context) => {
+    // @See `https://github.com/xlboy/twind/blob/17bdfce63a463f43614062040c2156112c87b50d/sites/twind.run/src/lib/monaco.ts#L219`
+    const className = context.document.getText(new vscode.Range(context.range.start, context.range.end));
+    const colorNames = Object.keys(namedColors);
+    const editabelColorReg = new RegExp(
+      `-\\[(${colorNames.join('|')}|(?:(?:#|(?:(?:hsl|rgb)a?|hwb|lab|lch|color)\\())[^]\\(]+)\\]$`,
+      'i',
+    );
+
+    const matchColor = className.match(editabelColorReg);
+    if (!matchColor) return [];
+
+    const currentColor = matchColor[1];
+    const isNamedColor = colorNames.includes(currentColor);
+    const tinyColor = fromRatio({
+      r: color.red,
+      g: color.green,
+      b: color.blue,
+      a: color.alpha,
+    });
+
+    let hexValue = tinyColor.toHex8String(!isNamedColor && (currentColor.length === 4 || currentColor.length === 5));
+    if (hexValue.length === 5) {
+      hexValue = hexValue.replace(/f$/, '');
+    } else if (hexValue.length === 9) {
+      hexValue = hexValue.replace(/ff$/, '');
+    }
+
+    const prefix = className.slice(0, matchColor.index);
+
+    return [hexValue, tinyColor.toRgbString().replace(/ /g, ''), tinyColor.toHslString().replace(/ /g, '')].map(v => ({
+      label: `${prefix}-[${v}]`,
+    }));
+  };
 
   private _refreshTwindInstance() {
     logger.info('Refreshing twind instance...');

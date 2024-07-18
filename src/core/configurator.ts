@@ -10,16 +10,14 @@ class Configurator {
   private _twindUserConfig?: TwindUserConfig;
   private _watchExtensionConfigCallbacks: Array<(config: ExtensionConfig) => void> = [];
   private _watchTwindUserConfigCallbacks: Array<(config: TwindUserConfig) => void> = [];
+  private _vscodeContext!: vscode.ExtensionContext;
 
-  constructor() {
+  init(vscodeContext: vscode.ExtensionContext) {
+    this._vscodeContext = vscodeContext;
+
+    this._listenConfigFileChange();
     this._syncExtensionConfig();
     this._syncTwindUserConfig();
-
-    vscode.workspace.onDidChangeConfiguration(() => {
-      this._syncExtensionConfig();
-      this._watchExtensionConfigCallbacks.forEach(cb => cb(this._extensionConfig));
-    });
-    // TODO: TwindUserConfig 也可以监听一下哇
   }
 
   getExtensionConfig() {
@@ -67,6 +65,19 @@ class Configurator {
 
     this._twindUserConfig = config;
     this._watchTwindUserConfigCallbacks.forEach(cb => cb(config));
+  }
+
+  private _listenConfigFileChange() {
+    // extension
+    vscode.workspace.onDidChangeConfiguration(() => {
+      this._syncExtensionConfig();
+      this._watchExtensionConfigCallbacks.forEach(cb => cb(this._extensionConfig));
+    });
+
+    // twind
+    const defaultFileWatcher = vscode.workspace.createFileSystemWatcher('**/{twind.config.js,twind.config.ts}');
+    defaultFileWatcher.onDidChange(() => this._syncTwindUserConfig());
+    this._vscodeContext.subscriptions.push(defaultFileWatcher);
   }
 }
 

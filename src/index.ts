@@ -7,6 +7,8 @@ import vscode from 'vscode';
 export function activate(vscodeContext: vscode.ExtensionContext) {
   logger.info(`Extension version: v${version}\n`);
 
+  configurator.init(vscodeContext);
+
   const extensionConfig = configurator.getExtensionConfig();
   if (!extensionConfig.enabled) {
     logger.info('Extension disabled, exiting...');
