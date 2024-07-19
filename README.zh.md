@@ -38,12 +38,15 @@ https://github.com/user-attachments/assets/483449e3-9dbd-465f-aa17-b4dc71d78fed
 - `twind-intellisense.presets`: 项目中使用到的预设
   - 类型：`Array<'tailwind' | 'tailwind-forms' | 'autoprefix' | 'container-queries' | 'line-clamp' | 'radix-ui' | 'typography'>`
   - 默认值：`["tailwind"]`
-    > 请注意，如果你的项目中使用了 `tailwind` 预设，请务必添加。
-    > `tailwind` 即为 `@twind/preset-tailwind`，其余的也是同理。
+  > 请注意，如果你的项目中使用了 `tailwind` 预设，请务必添加。
+
+  > `tailwind` 即为 `@twind/preset-tailwind`，其余的也是同理。
 - `twind-intellisense.configPath`: Twind 配置文件路径
   - 类型：`string | undefined`
-    > 可以是配置文件的完整路径（如：`<...>/lib/twind.ts`）
-    > 或是包含配置文件的目录路径（如：`<...>/lib`，会自动在此目录下寻找 `twind.config.(js|ts)` 配置文件）
-    > 如果不填，将会在工作区文件夹中查找配置文件（如：`${workspaceFolder}/twind.config.(js|ts)`）
+  > 可以是配置文件的完整路径（如：`<...>/lib/twind.ts`）
+
+  > 或是包含配置文件的目录路径（如：`<...>/lib`，会自动在此目录下寻找 `twind.config.(js|ts)` 配置文件）
+
+  > 如果不填，将会在工作区文件夹中查找配置文件（如：`${workspaceFolder}/twind.config.(js|ts)`）
 
 ## CHANGELOG

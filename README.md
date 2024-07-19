@@ -36,14 +36,22 @@ After installing the extension, simply configure it as follows.
   - Default: `true`
 
 - `twind-intellisense.presets`: Presets used in the project
+
   - Type: `Array<'tailwind' | 'tailwind-forms' | 'autoprefix' | 'container-queries' | 'line-clamp' | 'radix-ui' | 'typography'>`
   - Default: `["tailwind"]`
-    > Note: If your project uses the `tailwind` preset, be sure to add it.
-    > `tailwind` corresponds to `@twind/preset-tailwind`, and the others follow similarly.
+
+  > Note: If your project uses the `tailwind` preset, be sure to add it.
+
+  > `tailwind` corresponds to `@twind/preset-tailwind`, and the others follow similarly.
+
 - `twind-intellisense.configPath`: Path to the Twind configuration file
+
   - Type: `string | undefined`
-    > This can be the full path to the configuration file (e.g., `<...>/twind.config.js`)
-    >  or the directory containing the configuration file (e.g., `<...>`, which will automatically look for `twind.config.(js|ts)`)
-    > If not specified, the extension will look for the configuration file in the workspace folder (e.g., `${workspaceFolder}/twind.config.(js|ts)`)
+
+  > This can be the full path to the configuration file (e.g., `<...>/twind.config.js`)
+
+  > or the directory containing the configuration file (e.g., `<...>`, which will automatically look for `twind.config.(js|ts)`)
+
+  > If not specified, the extension will look for the configuration file in the workspace folder (e.g., `${workspaceFolder}/twind.config.(js|ts)`)
 
 ## CHANGELOG
