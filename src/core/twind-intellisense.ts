@@ -12,6 +12,7 @@ import presetTailwind from '@twind/preset-tailwind';
 import presetTailwindForms from '@twind/preset-tailwind-forms';
 import presetTypography from '@twind/preset-typography';
 import { getOffsetFromPosition } from '@vscode-use/utils';
+import { debounce } from 'lodash-es';
 import vscode from 'vscode';
 
 type SuggestProvider = vscode.CompletionItemProvider['provideCompletionItems'];
@@ -125,10 +126,14 @@ class TwindIntellisense {
     }));
   };
 
-  private _refreshTwindInstance() {
+  private _refreshTwindInstance = debounce(() => {
+    const twindUserConfig = configurator.getTwindUserConfig();
+    const extensionConfig = configurator.getExtensionConfig();
+    
+    if (!twindUserConfig) return;
+
     logger.info('Refreshing twind instance...');
 
-    const extensionConfig = configurator.getExtensionConfig();
     const twindDefaultPresetMap = {
       tailwind: presetTailwind(),
       'container-queries': presetContainerQueries(),
@@ -140,13 +145,12 @@ class TwindIntellisense {
     } satisfies Record<TwindDefaultPreset, Preset<any>>;
 
     const twindDefaultPresets = extensionConfig.presets.map(preset => twindDefaultPresetMap[preset]);
-    const twindUserConfig = configurator.getTwindUserConfig();
     this._twindInstance = createIntellisense({
       presets: [twindUserConfig as any, ...twindDefaultPresets].filter(Boolean),
     });
 
     logger.info('Twind instance refreshed');
-  }
+  }, 500);
 
   private _helpers = {
     convertToCompletionItem: (suggestion: Suggestion, index: number, range: vscode.Range): vscode.CompletionItem => {
