@@ -48,5 +48,16 @@ https://github.com/user-attachments/assets/483449e3-9dbd-465f-aa17-b4dc71d78fed
   > 或是包含配置文件的目录路径（如：`<...>/lib`，会自动在此目录下寻找 `twind.config.(js|ts)` 配置文件）
 
   > 如果不填，将会在工作区文件夹中查找配置文件（如：`${workspaceFolder}/twind.config.(js|ts)`）
+  
+## 各语言的支持情况
+
+> 因依赖 [`@twind/intellisense`](https://www.npmjs.com/package/@twind/intellisense) 库，此库目前只支持 `html`。
+
+> 目前，我正在尽力的基于此库扩展其他语言（`react`, `vue`, ...），敬请期待。
+
+- [x] HTML
+- [ ] React
+- [ ] Vue
+- [ ] ...
 
 ## CHANGELOG

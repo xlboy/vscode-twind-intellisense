@@ -54,4 +54,16 @@ After installing the extension, simply configure it as follows.
 
   > If not specified, the extension will look for the configuration file in the workspace folder (e.g., `${workspaceFolder}/twind.config.(js|ts)`)
 
+## Language Support Status
+
+> Due to reliance on the [`@twind/intellisense`](https://www.npmjs.com/package/@twind/intellisense) library, this library currently only supports `html`.
+
+> Currently, I am working hard to extend support for other languages (`react`, `vue`, ...), so please stay tuned.
+
+- [x] HTML
+- [ ] React
+- [ ] Vue
+- [ ] ...
+
+
 ## CHANGELOG
