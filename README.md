@@ -2,40 +2,48 @@
 
 English | [简体中文](./README.zh.md)
 
-## Its story
+https://github.com/user-attachments/assets/483449e3-9dbd-465f-aa17-b4dc71d78fed
+
+## About It
+
+This is a VSCode extension that provides intelligent insights for [Twind](https://twind.style).
+
+Why does the name end with `Phoenix`? Because it is rising from the ashes, and one day, it will shine as brightly as it once did.
 
 ## Features
 
-## 执行计划
+- Intelligent suggestions
+- Clear class information
+- Color previews
 
-1. UserConfig Module
+## How to Use
 
-> 管理用户配置
+After installing the extension, simply configure it as follows.
 
-```ts
-interface UserConfig {
-  extension: {};
-  twind: {};
-};
+```json
+{
+  // [Important] Specify the presets used in the project, such as `tailwind`, ...
+  "twind-intellisense.presets": ["tailwind", "typography"]
+  // ... see below for additional configurations
+}
 ```
 
-2. TwindIntellisense Module
+## Configuration
 
-> 依赖 `UserConfig`；管理 `TwindIntellisense` 及对外服务
+- `twind-intellisense.enabled`: Enable the extension
 
-```ts
-interface TwindIntellisense {
-  init(config: UserConfig): void;
-  update(config: UserConfig): void;
-  suggestAt(doc: Document, offset: number): void;
-  hoverAt(doc: Document, offset: number): void;
-};
-```
+  - Type: `boolean`
+  - Default: `true`
 
-3. Command Module
+- `twind-intellisense.presets`: Presets used in the project
+  - Type: `Array<'tailwind' | 'tailwind-forms' | 'autoprefix' | 'container-queries' | 'line-clamp' | 'radix-ui' | 'typography'>`
+  - Default: `["tailwind"]`
+    > Note: If your project uses the `tailwind` preset, be sure to add it.
+    > `tailwind` corresponds to `@twind/preset-tailwind`, and the others follow similarly.
+- `twind-intellisense.configPath`: Path to the Twind configuration file
+  - Type: `string | undefined`
+    > This can be the full path to the configuration file (e.g., `<...>/twind.config.js`)
+    >  or the directory containing the configuration file (e.g., `<...>`, which will automatically look for `twind.config.(js|ts)`)
+    > If not specified, the extension will look for the configuration file in the workspace folder (e.g., `${workspaceFolder}/twind.config.(js|ts)`)
 
-> 管理 Command
-
-4. Logger Module
-
-> 管理日志
+## CHANGELOG
