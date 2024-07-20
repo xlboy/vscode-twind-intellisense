@@ -67,3 +67,9 @@ After installing the extension, simply configure it as follows.
 
 
 ## CHANGELOG
+
+[CHANGELOG.md](https://github.com/xlboy/vscode-twind-intellisense/blob/master/CHANGELOG.md)
+
+## License
+
+MIT License © 2023-PRESENT  [xlboy](https://github.com/xlboy)

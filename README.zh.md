@@ -61,3 +61,9 @@ https://github.com/user-attachments/assets/483449e3-9dbd-465f-aa17-b4dc71d78fed
 - [ ] ...
 
 ## CHANGELOG
+
+[CHANGELOG.md](https://github.com/xlboy/vscode-twind-intellisense/blob/master/CHANGELOG.md)
+
+## License
+
+MIT License © 2023-PRESENT  [xlboy](https://github.com/xlboy)
