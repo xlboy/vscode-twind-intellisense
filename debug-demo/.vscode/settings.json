@@ -1,0 +1,8 @@
+{
+    "typescript.tsdk": "node_modules\\typescript\\lib",
+    "twind-intellisense.enabled": true,
+    "twind-intellisense.presets": [
+        "tailwind",
+        "line-clamp"
+    ],
+}

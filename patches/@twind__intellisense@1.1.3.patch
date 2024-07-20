@@ -1,0 +1,51 @@
+diff --git a/package.json b/package.json
+index bba54083dfb856b5f0095d9a42b611c3b319eb03..9e596d02b9cbfccb4ec748e9ff098d8ed9c9e497 100644
+--- a/package.json
++++ b/package.json
+@@ -43,34 +43,10 @@
+   "engines": {
+     "node": ">=14.15.0"
+   },
+-  "main": "./intellisense.cjs",
+   "exports": {
+     ".": {
+       "types": "./intellisense.d.ts",
+-      "development": {
+-        "esnext": "./intellisense.esnext.dev.js",
+-        "deno": "./intellisense.deno.dev.js",
+-        "module": "./intellisense.dev.js",
+-        "worker": "./intellisense.worker.dev.js",
+-        "browser": "./intellisense.browser.dev.js",
+-        "script": "./intellisense.global.dev.js",
+-        "node": {
+-          "import": "./intellisense.dev.mjs",
+-          "require": "./intellisense.dev.cjs"
+-        },
+-        "default": "./intellisense.dev.js"
+-      },
+-      "esnext": "./intellisense.esnext.js",
+-      "deno": "./intellisense.deno.js",
+-      "module": "./intellisense.js",
+-      "worker": "./intellisense.worker.js",
+-      "browser": "./intellisense.browser.js",
+-      "script": "./intellisense.global.js",
+-      "node": {
+-        "import": "./intellisense.mjs",
+-        "require": "./intellisense.cjs"
+-      },
+-      "default": "./intellisense.js"
++      "default": "./intellisense.dev.js"
+     },
+     "./package.json": "./package.json"
+   },
+@@ -95,9 +71,5 @@
+   },
+   "publishConfig": {
+     "access": "public"
+-  },
+-  "module": "./intellisense.js",
+-  "unpkg": "./intellisense.global.js",
+-  "jsdelivr": "./intellisense.global.js",
+-  "types": "./intellisense.d.ts"
++  }
+ }

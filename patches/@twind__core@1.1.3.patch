@@ -1,0 +1,51 @@
+diff --git a/package.json b/package.json
+index 2e72b04fc444822bcba347a0fada418f1f17bfc6..a5558451c48b5cc6c96e3a3099133dd6204adb0e 100644
+--- a/package.json
++++ b/package.json
+@@ -41,34 +41,10 @@
+   "engines": {
+     "node": ">=14.15.0"
+   },
+-  "main": "./core.cjs",
+   "exports": {
+     ".": {
+       "types": "./core.d.ts",
+-      "development": {
+-        "esnext": "./core.esnext.dev.js",
+-        "deno": "./core.deno.dev.js",
+-        "module": "./core.dev.js",
+-        "worker": "./core.worker.dev.js",
+-        "browser": "./core.browser.dev.js",
+-        "script": "./core.global.dev.js",
+-        "node": {
+-          "import": "./core.dev.mjs",
+-          "require": "./core.dev.cjs"
+-        },
+-        "default": "./core.dev.js"
+-      },
+-      "esnext": "./core.esnext.js",
+-      "deno": "./core.deno.js",
+-      "module": "./core.js",
+-      "worker": "./core.worker.js",
+-      "browser": "./core.browser.js",
+-      "script": "./core.global.js",
+-      "node": {
+-        "import": "./core.mjs",
+-        "require": "./core.cjs"
+-      },
+-      "default": "./core.js"
++      "default": "./core.dev.js"
+     },
+     "./package.json": "./package.json"
+   },
+@@ -87,9 +63,5 @@
+   },
+   "publishConfig": {
+     "access": "public"
+-  },
+-  "module": "./core.js",
+-  "unpkg": "./core.global.js",
+-  "jsdelivr": "./core.global.js",
+-  "types": "./core.d.ts"
++  }
+ }

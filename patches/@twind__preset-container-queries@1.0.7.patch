@@ -1,0 +1,51 @@
+diff --git a/package.json b/package.json
+index b2ed39a616141fcfb43828ecedac45fc1a5b002f..079bb96ee8106734bcfdb75d2202f92731e7f9a9 100644
+--- a/package.json
++++ b/package.json
+@@ -43,34 +43,10 @@
+   "engines": {
+     "node": ">=14.15.0"
+   },
+-  "main": "./preset-container-queries.cjs",
+   "exports": {
+     ".": {
+       "types": "./preset-container-queries.d.ts",
+-      "development": {
+-        "esnext": "./preset-container-queries.esnext.dev.js",
+-        "deno": "./preset-container-queries.deno.dev.js",
+-        "module": "./preset-container-queries.dev.js",
+-        "worker": "./preset-container-queries.worker.dev.js",
+-        "browser": "./preset-container-queries.browser.dev.js",
+-        "script": "./preset-container-queries.global.dev.js",
+-        "node": {
+-          "import": "./preset-container-queries.dev.mjs",
+-          "require": "./preset-container-queries.dev.cjs"
+-        },
+-        "default": "./preset-container-queries.dev.js"
+-      },
+-      "esnext": "./preset-container-queries.esnext.js",
+-      "deno": "./preset-container-queries.deno.js",
+-      "module": "./preset-container-queries.js",
+-      "worker": "./preset-container-queries.worker.js",
+-      "browser": "./preset-container-queries.browser.js",
+-      "script": "./preset-container-queries.global.js",
+-      "node": {
+-        "import": "./preset-container-queries.mjs",
+-        "require": "./preset-container-queries.cjs"
+-      },
+-      "default": "./preset-container-queries.js"
++      "default": "./preset-container-queries.dev.js"
+     },
+     "./package.json": "./package.json"
+   },
+@@ -86,9 +62,5 @@
+   },
+   "publishConfig": {
+     "access": "public"
+-  },
+-  "module": "./preset-container-queries.js",
+-  "unpkg": "./preset-container-queries.global.js",
+-  "jsdelivr": "./preset-container-queries.global.js",
+-  "types": "./preset-container-queries.d.ts"
++  }
+ }
