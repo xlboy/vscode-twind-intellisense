@@ -3,6 +3,10 @@
     "twind-intellisense.enabled": true,
     "twind-intellisense.presets": [
         "tailwind",
-        "line-clamp"
+        "line-clamp",
+        "autoprefix"
     ],
+    "twind-intellisense.colorPreview": {
+        "enabled": true
+    }
 }

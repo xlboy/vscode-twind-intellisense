@@ -2,8 +2,8 @@ import { configurator } from './configurator';
 import { logger } from './logger';
 import { TwindDefaultPreset } from './types';
 import { fromRatio, names as namedColors } from '@ctrl/tinycolor';
+import { type Intellisense, type Suggestion, createIntellisense } from '@phoenix-twind/intellisense';
 import { type Preset } from '@twind/core';
-import { type Intellisense, type Suggestion, createIntellisense } from '@twind/intellisense';
 import presetAutoprefix from '@twind/preset-autoprefix';
 import presetContainerQueries from '@twind/preset-container-queries';
 import presetLineClamp from '@twind/preset-line-clamp';
@@ -17,15 +17,26 @@ import vscode from 'vscode';
 
 type SuggestProvider = vscode.CompletionItemProvider['provideCompletionItems'];
 type HoverProvider = vscode.HoverProvider['provideHover'];
-type DocumentColorProvider = vscode.DocumentColorProvider['provideDocumentColors'];
-type DocumentColorEditProvider = vscode.DocumentColorProvider['provideColorPresentations'];
 
 class TwindIntellisense {
   private _twindInstance?: Intellisense;
+  private readonly _decorations = {
+    classColorIcon: vscode.window.createTextEditorDecorationType({
+      before: {
+        width: '0.9em',
+        height: '0.9em',
+        contentText: ' ',
+        border: '1px solid',
+        margin: `-0.16em 0.2em auto auto;vertical-align: middle;border-radius: 4px;`,
+      },
+      dark: { before: { borderColor: '#eeeeee50' } },
+      light: { before: { borderColor: '#00000050' } },
+    }),
+  };
+  private _cachedColorDecorations = new Map</* code */ string, vscode.DecorationOptions[]>();
 
   constructor() {
-    configurator.onWatchTwindUserConfig(this._refreshTwindInstance.bind(this));
-    configurator.onWatchExtensionConfig(this._refreshTwindInstance.bind(this));
+    this._initWatcher();
   }
 
   suggestProvider: SuggestProvider = async (doc, position) => {
@@ -77,62 +88,45 @@ class TwindIntellisense {
     return;
   };
 
-  documentColorProvider: DocumentColorProvider = async doc => {
-    if (!this._twindInstance) return [];
+  renderClass(editor: vscode.TextEditor) {
+    if (!this._twindInstance) return;
 
-    const colors = (await this._twindInstance.collectColors(doc.getText(), doc.languageId)) ?? [];
+    const extensionConfig = configurator.getExtensionConfig();
 
-    return colors.map(
-      c =>
-        new vscode.ColorInformation(
-          new vscode.Range(doc.positionAt(c.start), doc.positionAt(c.end)),
-          new vscode.Color(c.rgba.r / 255, c.rgba.g / 255, c.rgba.b / 255, c.rgba.a),
-        ),
-    );
-  };
+    renderColorIcon.call(this);
 
-  documentColorEditProvider: DocumentColorEditProvider = async (color, context) => {
-    // @See `https://github.com/xlboy/twind/blob/17bdfce63a463f43614062040c2156112c87b50d/sites/twind.run/src/lib/monaco.ts#L219`
-    const className = context.document.getText(new vscode.Range(context.range.start, context.range.end));
-    const colorNames = Object.keys(namedColors);
-    const editabelColorReg = new RegExp(
-      `-\\[(${colorNames.join('|')}|(?:(?:#|(?:(?:hsl|rgb)a?|hwb|lab|lch|color)\\())[^]\\(]+)\\]$`,
-      'i',
-    );
+    async function renderColorIcon(this: TwindIntellisense) {
+      if (!extensionConfig.colorPreview.enabled) {
+        editor.setDecorations(this._decorations.classColorIcon, []);
+        return;
+      }
 
-    const matchColor = className.match(editabelColorReg);
-    if (!matchColor) return [];
+      const docCode = editor.document.getText();
+      const docLanguageId = editor.document.languageId;
 
-    const currentColor = matchColor[1];
-    const isNamedColor = colorNames.includes(currentColor);
-    const tinyColor = fromRatio({
-      r: color.red,
-      g: color.green,
-      b: color.blue,
-      a: color.alpha,
-    });
-
-    let hexValue = tinyColor.toHex8String(!isNamedColor && (currentColor.length === 4 || currentColor.length === 5));
-    if (hexValue.length === 5) {
-      hexValue = hexValue.replace(/f$/, '');
-    } else if (hexValue.length === 9) {
-      hexValue = hexValue.replace(/ff$/, '');
+      let colorDecorations = this._cachedColorDecorations.get(docCode);
+      if (!colorDecorations) {
+        const colors = await this._twindInstance!.collectColors(docCode, docLanguageId);
+        colorDecorations = colors.map(color => {
+          const colorValue = namedColors[color.value] || fromRatio(color.rgba).toHexString();
+          const range = new vscode.Range(
+            editor.document.positionAt(color.start),
+            editor.document.positionAt(color.end),
+          );
+          return { range, renderOptions: { before: { backgroundColor: colorValue } } };
+        });
+        this._cachedColorDecorations.set(docCode, colorDecorations);
+      }
+      editor.setDecorations(this._decorations.classColorIcon, []);
+      editor.setDecorations(this._decorations.classColorIcon, colorDecorations);
     }
+  }
 
-    const prefix = className.slice(0, matchColor.index);
-
-    return [hexValue, tinyColor.toRgbString().replace(/ /g, ''), tinyColor.toHslString().replace(/ /g, '')].map(v => ({
-      label: `${prefix}-[${v}]`,
-    }));
-  };
-
-  private _refreshTwindInstance = debounce(() => {
+  private _refreshTwindInstance = () => {
     const twindUserConfig = configurator.getTwindUserConfig();
     const extensionConfig = configurator.getExtensionConfig();
-    
-    if (!twindUserConfig) return;
 
-    logger.info('Refreshing twind instance...');
+    if (!twindUserConfig) return;
 
     const twindDefaultPresetMap = {
       tailwind: presetTailwind(),
@@ -148,9 +142,33 @@ class TwindIntellisense {
     this._twindInstance = createIntellisense({
       presets: [twindUserConfig as any, ...twindDefaultPresets].filter(Boolean),
     });
+  };
 
-    logger.info('Twind instance refreshed');
-  }, 500);
+  private _initWatcher() {
+    configurator.onWatchTwindUserConfig(() => {
+      this._cachedColorDecorations.clear();
+      this._refreshTwindInstance();
+      if (vscode.window.activeTextEditor) {
+        this.renderClass(vscode.window.activeTextEditor);
+      }
+    });
+    configurator.onWatchExtensionConfig(() => {
+      this._refreshTwindInstance();
+      if (vscode.window.activeTextEditor) {
+        this.renderClass(vscode.window.activeTextEditor);
+      }
+    });
+    vscode.window.onDidChangeActiveTextEditor(editor => {
+      if (editor) this.renderClass(editor);
+    });
+    vscode.workspace.onDidChangeTextDocument(
+      debounce<(event: vscode.TextDocumentChangeEvent) => void>(event => {
+        if (vscode.window.activeTextEditor?.document === event.document) {
+          twindIntellisense.renderClass(vscode.window.activeTextEditor);
+        }
+      }, 1000),
+    );
+  }
 
   private _helpers = {
     convertToCompletionItem: (suggestion: Suggestion, index: number, range: vscode.Range): vscode.CompletionItem => {

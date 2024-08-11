@@ -3,7 +3,6 @@ import type { ExtensionConfig } from './types';
 import type { TwindUserConfig } from '@twind/core';
 import { getRootPath } from '@vscode-use/utils';
 import fs from 'fs-extra';
-import { debounce } from 'lodash-es';
 import path from 'path';
 import { createConfigLoader } from 'unconfig';
 import vscode from 'vscode';
@@ -41,17 +40,20 @@ class Configurator {
 
   private _syncExtensionConfig() {
     const config = vscode.workspace.getConfiguration('twind-intellisense');
-
+    
     this._extensionConfig = {
       enabled: config.get('enabled', true),
       presets: config.get('presets', ['tailwind']),
       configPath: config.get('configPath', undefined),
+      colorPreview: {
+        enabled: config.get('colorPreview.enabled', true),
+      }
     };
 
     this._watchExtensionConfigCallbacks.forEach(cb => cb(this._extensionConfig));
   }
 
-  private _syncTwindUserConfig = debounce(async () => {
+  private _syncTwindUserConfig = async () => {
     const twindConfigLoader = createConfigLoader<TwindUserConfig>(
       (() => {
         let { configPath: twindConfigPath } = this._extensionConfig;
@@ -84,7 +86,7 @@ class Configurator {
 
     this._twindUserConfig = config;
     this._watchTwindUserConfigCallbacks.forEach(cb => cb(config));
-  }, 500);
+  };
 
   private _listenConfigFileChange() {
     let twindConfigWatcher: vscode.FileSystemWatcher | undefined;
