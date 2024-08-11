@@ -1,5 +1,5 @@
 diff --git a/package.json b/package.json
-index bba54083dfb856b5f0095d9a42b611c3b319eb03..9e596d02b9cbfccb4ec748e9ff098d8ed9c9e497 100644
+index e859970c5a8418bd85eec74e517bbec2fd162add..283b6407a22911b5ae22952e5d74d2397611766e 100644
 --- a/package.json
 +++ b/package.json
 @@ -43,34 +43,10 @@
@@ -38,7 +38,7 @@ index bba54083dfb856b5f0095d9a42b611c3b319eb03..9e596d02b9cbfccb4ec748e9ff098d8e
      },
      "./package.json": "./package.json"
    },
-@@ -95,9 +71,5 @@
+@@ -97,9 +73,5 @@
    },
    "publishConfig": {
      "access": "public"

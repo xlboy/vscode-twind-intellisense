@@ -2,7 +2,7 @@
 
 English | [简体中文](./README.zh.md)
 
-https://github.com/user-attachments/assets/483449e3-9dbd-465f-aa17-b4dc71d78fed
+<video src="https://github.com/user-attachments/assets/bc658c10-a684-4201-8960-8c00e835c912"></video>
 
 ## About It
 
@@ -54,17 +54,30 @@ After installing the extension, simply configure it as follows.
 
   > If not specified, the extension will look for the configuration file in the workspace folder (e.g., `${workspaceFolder}/twind.config.(js|ts)`)
 
+- `twind-intellisense.colorPreview`:
+
+  - Type：
+
+  ```json
+  {
+    "twind-intellisense.colorPreview": {
+      // Enable or disable the color preview feature
+      "enabled": true
+    }
+  }
+  ```
+
 ## Language Support Status
 
-> Due to reliance on the [`@twind/intellisense`](https://www.npmjs.com/package/@twind/intellisense) library, this library currently only supports `html`.
-
-> Currently, I am working hard to extend support for other languages (`react`, `vue`, ...), so please stay tuned.
-
 - [x] HTML
-- [ ] React
+- [x] JavaScript
+- [x] JavaScriptReact
+- [x] TypeScript
+- [x] TypeScriptReact
 - [ ] Vue
+- [ ] Svelte
+- [ ] SolidJS
 - [ ] ...
-
 
 ## CHANGELOG
 
@@ -72,4 +85,4 @@ After installing the extension, simply configure it as follows.
 
 ## License
 
-MIT License © 2023-PRESENT  [xlboy](https://github.com/xlboy)
+MIT License © 2024-PRESENT [xlboy](https://github.com/xlboy)

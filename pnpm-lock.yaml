@@ -5,12 +5,12 @@ settings:
   excludeLinksFromLockfile: false
 
 patchedDependencies:
+  '@phoenix-twind/intellisense':
+    hash: pjf6z3fima62fbhqmzs5wo7xay
+    path: patches/@phoenix-twind__intellisense.patch
   '@twind/core@1.1.3':
     hash: 2henlbu2im4bjihhetrjmhnzzm
     path: patches/@twind__core@1.1.3.patch
-  '@twind/intellisense@1.1.3':
-    hash: i7wgpeydqssomgjm3f3tcemj4e
-    path: patches/@twind__intellisense@1.1.3.patch
   '@twind/preset-container-queries@1.0.7':
     hash: fn4ov3urmp3u253a73cpau4jya
     path: patches/@twind__preset-container-queries@1.0.7.patch
@@ -31,6 +31,9 @@ importers:
       '@ctrl/tinycolor':
         specifier: ^4.1.0
         version: 4.1.0
+      '@phoenix-twind/intellisense':
+        specifier: 1.1.4-alpha.2
+        version: 1.1.4-alpha.2(patch_hash=pjf6z3fima62fbhqmzs5wo7xay)(@twind/core@1.1.3(patch_hash=2henlbu2im4bjihhetrjmhnzzm)(typescript@5.5.3))(typescript@5.5.3)
       '@trivago/prettier-plugin-sort-imports':
         specifier: ^4.3.0
         version: 4.3.0(prettier@3.3.3)
@@ -40,9 +43,6 @@ importers:
       '@twind/core':
         specifier: ^1.1.3
         version: 1.1.3(patch_hash=2henlbu2im4bjihhetrjmhnzzm)(typescript@5.5.3)
-      '@twind/intellisense':
-        specifier: ^1.1.3
-        version: 1.1.3(patch_hash=i7wgpeydqssomgjm3f3tcemj4e)(@twind/core@1.1.3(patch_hash=2henlbu2im4bjihhetrjmhnzzm)(typescript@5.5.3))(typescript@5.5.3)
       '@twind/preset-autoprefix':
         specifier: ^1.0.7
         version: 1.0.7(@twind/core@1.1.3(patch_hash=2henlbu2im4bjihhetrjmhnzzm)(typescript@5.5.3))(typescript@5.5.3)
@@ -102,7 +102,7 @@ importers:
         version: 6.0.1
       tsup:
         specifier: ^8.1.0
-        version: 8.1.0(typescript@5.5.3)
+        version: 8.1.0(postcss@8.4.41)(typescript@5.5.3)
       tsx:
         specifier: ^4.16.2
         version: 4.16.2
@@ -414,6 +414,16 @@ packages:
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
 
+  '@phoenix-twind/intellisense@1.1.4-alpha.2':
+    resolution: {integrity: sha512-zCzDpbKQqnS6GPvT8h2tQPKFMWFS809e2ZhHymiHBirfT9li/HqCzMhTeHr/CIF0OR7WcpIVsOPZ8tfBKDBMGg==}
+    engines: {node: '>=14.15.0'}
+    peerDependencies:
+      '@twind/core': ^1.1.3
+      typescript: ^5.5.3
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+
   '@pkgjs/parseargs@0.11.0':
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
     engines: {node: '>=14'}
@@ -442,55 +452,46 @@ packages:
     resolution: {integrity: sha512-P9bSiAUnSSM7EmyRK+e5wgpqai86QOSv8BwvkGjLwYuOpaeomiZWifEos517CwbG+aZl1T4clSE1YqqH2JRs+g==}
     cpu: [arm]
     os: [linux]
-    libc: [glibc]
 
   '@rollup/rollup-linux-arm-musleabihf@4.18.1':
     resolution: {integrity: sha512-5RnjpACoxtS+aWOI1dURKno11d7krfpGDEn19jI8BuWmSBbUC4ytIADfROM1FZrFhQPSoP+KEa3NlEScznBTyQ==}
     cpu: [arm]
     os: [linux]
-    libc: [musl]
 
   '@rollup/rollup-linux-arm64-gnu@4.18.1':
     resolution: {integrity: sha512-8mwmGD668m8WaGbthrEYZ9CBmPug2QPGWxhJxh/vCgBjro5o96gL04WLlg5BA233OCWLqERy4YUzX3bJGXaJgQ==}
     cpu: [arm64]
     os: [linux]
-    libc: [glibc]
 
   '@rollup/rollup-linux-arm64-musl@4.18.1':
     resolution: {integrity: sha512-dJX9u4r4bqInMGOAQoGYdwDP8lQiisWb9et+T84l2WXk41yEej8v2iGKodmdKimT8cTAYt0jFb+UEBxnPkbXEQ==}
     cpu: [arm64]
     os: [linux]
-    libc: [musl]
 
   '@rollup/rollup-linux-powerpc64le-gnu@4.18.1':
     resolution: {integrity: sha512-V72cXdTl4EI0x6FNmho4D502sy7ed+LuVW6Ym8aI6DRQ9hQZdp5sj0a2usYOlqvFBNKQnLQGwmYnujo2HvjCxQ==}
     cpu: [ppc64]
     os: [linux]
-    libc: [glibc]
 
   '@rollup/rollup-linux-riscv64-gnu@4.18.1':
     resolution: {integrity: sha512-f+pJih7sxoKmbjghrM2RkWo2WHUW8UbfxIQiWo5yeCaCM0TveMEuAzKJte4QskBp1TIinpnRcxkquY+4WuY/tg==}
     cpu: [riscv64]
     os: [linux]
-    libc: [glibc]
 
   '@rollup/rollup-linux-s390x-gnu@4.18.1':
     resolution: {integrity: sha512-qb1hMMT3Fr/Qz1OKovCuUM11MUNLUuHeBC2DPPAWUYYUAOFWaxInaTwTQmc7Fl5La7DShTEpmYwgdt2hG+4TEg==}
     cpu: [s390x]
     os: [linux]
-    libc: [glibc]
 
   '@rollup/rollup-linux-x64-gnu@4.18.1':
     resolution: {integrity: sha512-7O5u/p6oKUFYjRbZkL2FLbwsyoJAjyeXHCU3O4ndvzg2OFO2GinFPSJFGbiwFDaCFc+k7gs9CF243PwdPQFh5g==}
     cpu: [x64]
     os: [linux]
-    libc: [glibc]
 
   '@rollup/rollup-linux-x64-musl@4.18.1':
     resolution: {integrity: sha512-pDLkYITdYrH/9Cv/Vlj8HppDuLMDUBmgsM0+N+xLtFd18aXgM9Nyqupb/Uw+HeidhfYg2lD6CXvz6CjoVOaKjQ==}
     cpu: [x64]
     os: [linux]
-    libc: [musl]
 
   '@rollup/rollup-win32-arm64-msvc@4.18.1':
     resolution: {integrity: sha512-W2ZNI323O/8pJdBGil1oCauuCzmVd9lDmWBBqxYZcOqWD6aWqJtVBQ1dFrF4dYpZPks6F+xCZHfzG5hYlSHZ6g==}
@@ -523,16 +524,6 @@ packages:
     resolution: {integrity: sha512-/B/aNFerMb2IeyjSJy3SJxqVxhrT77gBDknLMiZqXIRr4vNJqiuhx7KqUSRzDCwUmyGuogkamz+aOLzN6MeSLw==}
     engines: {node: '>=14.15.0'}
     peerDependencies:
-      typescript: ^4.8.4
-    peerDependenciesMeta:
-      typescript:
-        optional: true
-
-  '@twind/intellisense@1.1.3':
-    resolution: {integrity: sha512-RgONRY5Qu4Recr7huDAwDUQOA1R6OOym+XVhI0ix5eobFLgylUBzb07x++r6WRNGcbRhvhUtn2HPyYYTtwdMIw==}
-    engines: {node: '>=14.15.0'}
-    peerDependencies:
-      '@twind/core': ^1.1.0
       typescript: ^4.8.4
     peerDependenciesMeta:
       typescript:
@@ -809,6 +800,12 @@ packages:
 
   chownr@1.1.4:
     resolution: {integrity: sha512-jJ0bqzaylmJtVnNgzTeSOs8DPavpbYgEr/b0YL8/2GO3xJEhInFmhKMUnEJQjZumK7KXGFhUy89PrsJWlakBVg==}
+
+  class-string-matcher@0.1.0-alpha.1:
+    resolution: {integrity: sha512-uDQ9Phl4xZdTRmzeNUTSQe7krBh42rFbP6OMwp23a19OLll8jpbWtaVogtd8Q2s/zGERrKm2hX++YYXiTxX8NA==}
+    engines: {node: '>=20.0.0', pnpm: ^9.0.0}
+    peerDependencies:
+      moo: ^0.5.2
 
   cockatiel@3.1.3:
     resolution: {integrity: sha512-xC759TpZ69d7HhfDp8m2WkRwEUiCkxY8Ee2OQH/3H6zmy2D/5Sm+zSTbPRa+V2QyjDtpMvjOIAOVjA2gp6N1kQ==}
@@ -1489,6 +1486,9 @@ packages:
   mkdirp-classic@0.5.3:
     resolution: {integrity: sha512-gKLcREMhtuZRwRAfqP3RFW+TK4JqApVBtOIftVgjuABpAtpxhPGaDcfvbhNvD0B8iD1oUr/txX35NjcaY6Ns/A==}
 
+  moo@0.5.2:
+    resolution: {integrity: sha512-iSAJLHYKnX41mKcJKjqvnAN9sf0LMDTXDEvFv+ffuRR9a1MIuXLjMNL6EsnDHSkKLTWNqQQ5uo61P4EbU4NU+Q==}
+
   ms@2.1.2:
     resolution: {integrity: sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==}
 
@@ -1500,6 +1500,11 @@ packages:
 
   mz@2.7.0:
     resolution: {integrity: sha512-z81GNO7nnYMEhrGh9LeymoE4+Yr0Wn5McHIZMK5cfQCl+NDX08sCZgUc9/6MHni9IWuFLm1Z3HTCXu2z9fN62Q==}
+
+  nanoid@3.3.7:
+    resolution: {integrity: sha512-eSRppjcPIatRIMC1U6UngP8XFcz8MQWGQdt1MTBQ7NaAmvXDfvNxbvWV3x2y6CdEUciCSsDHDQZbhYaB8QEo2g==}
+    engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
+    hasBin: true
 
   napi-build-utils@1.0.2:
     resolution: {integrity: sha512-ONmRUqK7zj7DWX0D9ADe03wbwOBZxNAfF20PlGfCWQcD3+/MakShIHrMqx9YwPTfxDdF1zLeL+RGZiR9kGMLdg==}
@@ -1657,6 +1662,10 @@ packages:
         optional: true
       ts-node:
         optional: true
+
+  postcss@8.4.41:
+    resolution: {integrity: sha512-TesUflQ0WKZqAvg52PWL6kHgLKP6xB6heTOdoYM0Wt2UHyxNa4K25EZZMgKns3BH1RLVbZCREPpLY0rhnNoHVQ==}
+    engines: {node: ^10 || ^12 || >=14}
 
   prebuild-install@7.1.2:
     resolution: {integrity: sha512-UnNke3IQb6sgarcZIDU3gbMeTp/9SSU1DAIkil7PrqG1vZlBtY5msYccSKSHDqa3hNg436IXK+SNImReuA1wEQ==}
@@ -2386,6 +2395,21 @@ snapshots:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.17.1
 
+  '@phoenix-twind/intellisense@1.1.4-alpha.2(patch_hash=pjf6z3fima62fbhqmzs5wo7xay)(@twind/core@1.1.3(patch_hash=2henlbu2im4bjihhetrjmhnzzm)(typescript@5.5.3))(typescript@5.5.3)':
+    dependencies:
+      '@ctrl/tinycolor': 3.6.1
+      '@twind/core': 1.1.3(patch_hash=2henlbu2im4bjihhetrjmhnzzm)(typescript@5.5.3)
+      class-string-matcher: 0.1.0-alpha.1(moo@0.5.2)
+      css-tree: 2.3.1
+      cssbeautify: 0.3.1
+      genex: 1.1.0
+      match-sorter: 6.3.4
+      moo: 0.5.2
+      quick-lru: 6.1.2
+      showdown: 2.1.0
+    optionalDependencies:
+      typescript: 5.5.3
+
   '@pkgjs/parseargs@0.11.0':
     optional: true
 
@@ -2454,19 +2478,6 @@ snapshots:
   '@twind/core@1.1.3(patch_hash=2henlbu2im4bjihhetrjmhnzzm)(typescript@5.5.3)':
     dependencies:
       csstype: 3.1.3
-    optionalDependencies:
-      typescript: 5.5.3
-
-  '@twind/intellisense@1.1.3(patch_hash=i7wgpeydqssomgjm3f3tcemj4e)(@twind/core@1.1.3(patch_hash=2henlbu2im4bjihhetrjmhnzzm)(typescript@5.5.3))(typescript@5.5.3)':
-    dependencies:
-      '@ctrl/tinycolor': 3.6.1
-      '@twind/core': 1.1.3(patch_hash=2henlbu2im4bjihhetrjmhnzzm)(typescript@5.5.3)
-      css-tree: 2.3.1
-      cssbeautify: 0.3.1
-      genex: 1.1.0
-      match-sorter: 6.3.4
-      quick-lru: 6.1.2
-      showdown: 2.1.0
     optionalDependencies:
       typescript: 5.5.3
 
@@ -2760,6 +2771,10 @@ snapshots:
 
   chownr@1.1.4:
     optional: true
+
+  class-string-matcher@0.1.0-alpha.1(moo@0.5.2):
+    dependencies:
+      moo: 0.5.2
 
   cockatiel@3.1.3: {}
 
@@ -3528,6 +3543,8 @@ snapshots:
   mkdirp-classic@0.5.3:
     optional: true
 
+  moo@0.5.2: {}
+
   ms@2.1.2: {}
 
   ms@2.1.3: {}
@@ -3539,6 +3556,9 @@ snapshots:
       any-promise: 1.3.0
       object-assign: 4.1.1
       thenify-all: 1.6.0
+
+  nanoid@3.3.7:
+    optional: true
 
   napi-build-utils@1.0.2:
     optional: true
@@ -3677,10 +3697,19 @@ snapshots:
 
   possible-typed-array-names@1.0.0: {}
 
-  postcss-load-config@4.0.2:
+  postcss-load-config@4.0.2(postcss@8.4.41):
     dependencies:
       lilconfig: 3.1.2
       yaml: 2.4.5
+    optionalDependencies:
+      postcss: 8.4.41
+
+  postcss@8.4.41:
+    dependencies:
+      nanoid: 3.3.7
+      picocolors: 1.0.1
+      source-map-js: 1.2.0
+    optional: true
 
   prebuild-install@7.1.2:
     dependencies:
@@ -4024,7 +4053,7 @@ snapshots:
 
   tslib@2.6.3: {}
 
-  tsup@8.1.0(typescript@5.5.3):
+  tsup@8.1.0(postcss@8.4.41)(typescript@5.5.3):
     dependencies:
       bundle-require: 4.2.1(esbuild@0.21.5)
       cac: 6.7.14
@@ -4034,13 +4063,14 @@ snapshots:
       execa: 5.1.1
       globby: 11.1.0
       joycon: 3.1.1
-      postcss-load-config: 4.0.2
+      postcss-load-config: 4.0.2(postcss@8.4.41)
       resolve-from: 5.0.0
       rollup: 4.18.1
       source-map: 0.8.0-beta.0
       sucrase: 3.35.0
       tree-kill: 1.2.2
     optionalDependencies:
+      postcss: 8.4.41
       typescript: 5.5.3
     transitivePeerDependencies:
       - supports-color
