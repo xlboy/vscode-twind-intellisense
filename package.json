@@ -3,7 +3,7 @@
   "publisher": "xlboy",
   "displayName": "Twind Intellisense (Phoenix)",
   "preview": true,
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Twind Intellisense for VSCode, It's waiting for its king to return",
   "license": "MIT",
   "type": "module",
@@ -88,12 +88,13 @@
     "build": "tsup",
     "dev": "tsup --watch src",
     "type-check": "tsc",
+    "yalc-update": "yalc update && tsx scripts/patch-yalc && pnpm i",
     "vsce-package": "run-s build && tsx scripts/vsce-package",
     "vsce-publish": "run-s build && tsx scripts/vsce-package --publish"
   },
   "devDependencies": {
     "@ctrl/tinycolor": "^4.1.0",
-    "@phoenix-twind/intellisense": "1.1.4-alpha.2",
+    "@phoenix-twind/intellisense": "1.1.4-alpha.3",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "@tsconfig/node20": "^20.1.4",
     "@twind/core": "^1.1.3",
