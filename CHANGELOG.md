@@ -1,3 +1,17 @@
+# 0.4.0 (2024-08-16)
+
+## Added
+
+- Added the `classExtraction` configuration option
+
+## Changed
+
+- When triggering suggestions, error logs are no longer output if no relevant results are found
+
+- Upgraded `@phoenix-twind/intellisense` to version `1.1.4-alpha.4`, bringing the following improvements:
+
+  - Added `ignorePrefixes` to class extraction, ensuring compatibility when using `` css`...` `` inside `tw(...)`
+
 # 0.3.0 (2024-08-13)
 
 Upgrade `@phoenix-twind/intellisense`, with the following changes:
