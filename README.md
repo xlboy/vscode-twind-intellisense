@@ -41,31 +41,50 @@ After installing the extension, simply configure it as follows.
   - Default: `["tailwind"]`
 
   > Note: If your project uses the `tailwind` preset, be sure to add it.
-
   > `tailwind` corresponds to `@twind/preset-tailwind`, and the others follow similarly.
 
 - `twind-intellisense.configPath`: Path to the Twind configuration file
 
   - Type: `string | undefined`
 
-  > This can be the full path to the configuration file (e.g., `<...>/twind.config.js`)
-
-  > or the directory containing the configuration file (e.g., `<...>`, which will automatically look for `twind.config.(js|ts)`)
-
+  > This can be the full path to the configuration file (e.g., `<...>/twind.config.js`).
+  > or the directory containing the configuration file (e.g., `<...>`, which will automatically look for `twind.config.(js|ts)`).
   > If not specified, the extension will look for the configuration file in the workspace folder (e.g., `${workspaceFolder}/twind.config.(js|ts)`)
 
 - `twind-intellisense.colorPreview`:
-
-  - Type：
-
-  ```json
-  {
-    "twind-intellisense.colorPreview": {
-      // Enable or disable the color preview feature
-      "enabled": true
+  - Type: `object`
+  - Properties:
+    - `enabled`:
+      - Type: `boolean`
+      - Default: `true`
+      - Description: Whether to enable the color preview feature
+  - Example:
+    ```json
+    {
+      "twind-intellisense.colorPreview": {
+        "enabled": true
+      }
     }
-  }
-  ```
+    ```
+- `twind-intellisense.classExtraction`: Configuration for class extraction
+
+  - Type: `object`
+  - Properties:
+    - `prefixes`:
+      - Type: `Array<string>`
+      - Description: The prefixes of classes to extract, as regex strings. For example: `"class(Name)?="`
+    - `ignorePrefixes`:
+      - Type: `Array<string>`
+      - Description: The prefixes of classes to ignore, as regex strings. For example: ``"css(?=`|\()"``
+  - Example:
+    ```json
+    {
+      "twind-intellisense.classExtraction": {
+        "prefixes": ["class(Name)?="],
+        "ignorePrefixes": ["css(?=`|()"]
+      }
+    }
+    ```
 
 ## Language Support Status
 

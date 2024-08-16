@@ -32,4 +32,21 @@ export interface ExtensionConfig {
      */
     enabled: boolean;
   };
+
+  classExtraction?: {
+    /**
+     * @example
+     * ```ts
+     * ['class(Name)?=']
+     * ```
+     */
+    prefixes?: string[];
+    /**
+     * @example
+     * ```ts
+     * ['css(?=`|\()']
+     * ```
+     */
+    ignorePrefixes?: string[];
+  };
 }

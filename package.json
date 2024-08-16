@@ -79,6 +79,25 @@
               "description": "Enable color preview"
             }
           }
+        },
+        "twind-intellisense.classExtraction": {
+          "type": "object",
+          "properties": {
+            "prefixes": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Prefixes to extract classes, parameter type is a regex string, e.g., \"class(Name)?=\""
+            },
+            "ignorePrefixes": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Prefixes to ignore classes, parameter type is a regex string, e.g., \"css(?=`|()\""
+            }
+          }
         }
       }
     }

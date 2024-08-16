@@ -2,7 +2,13 @@ import { configurator } from './configurator';
 import { logger } from './logger';
 import { TwindDefaultPreset } from './types';
 import { fromRatio, names as namedColors } from '@ctrl/tinycolor';
-import { type Intellisense, type Suggestion, createIntellisense } from '@phoenix-twind/intellisense';
+import {
+  type Intellisense,
+  IntellisenseOptions,
+  LanguageId,
+  type Suggestion,
+  createIntellisense,
+} from '@phoenix-twind/intellisense';
 import { type Preset } from '@twind/core';
 import presetAutoprefix from '@twind/preset-autoprefix';
 import presetContainerQueries from '@twind/preset-container-queries';
@@ -138,10 +144,27 @@ class TwindIntellisense {
       'radix-ui': presetRadixUI(),
     } satisfies Record<TwindDefaultPreset, Preset<any>>;
 
+    const languageOptions = (
+      ['html', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'vue', 'svelte'] as LanguageId[]
+    ).reduce(
+      (acc, lang) => {
+        const { ignorePrefixes = [], prefixes = [] } = extensionConfig.classExtraction || {};
+        acc[lang] = {
+          classExtraction: {
+            prefixes: prefixes.map(v => new RegExp(v)),
+            ignorePrefixes: ignorePrefixes.map(v => new RegExp(v)),
+          },
+        };
+        return acc;
+      },
+      {} as NonNullable<IntellisenseOptions['languages']>,
+    );
+
     const twindDefaultPresets = extensionConfig.presets.map(preset => twindDefaultPresetMap[preset]);
-    this._twindInstance = createIntellisense({
-      presets: [twindUserConfig as any, ...twindDefaultPresets].filter(Boolean),
-    });
+    this._twindInstance = createIntellisense(
+      { presets: [twindUserConfig as any, ...twindDefaultPresets].filter(Boolean) },
+      { languages: languageOptions },
+    );
   };
 
   private _initWatcher() {
