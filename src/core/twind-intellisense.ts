@@ -56,7 +56,7 @@ class TwindIntellisense {
 
       const suggestResult = await this._twindInstance.suggestAt(docCode, positionOffset, doc.languageId);
       if (!suggestResult) {
-        logger.error('Error while suggesting: suggestions is undefined');
+        // logger.error('Error while suggesting: suggestions is undefined');
         return [];
       }
 
