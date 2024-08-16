@@ -40,14 +40,15 @@ class Configurator {
 
   private _syncExtensionConfig() {
     const config = vscode.workspace.getConfiguration('twind-intellisense');
-    
+
     this._extensionConfig = {
       enabled: config.get('enabled', true),
       presets: config.get('presets', ['tailwind']),
       configPath: config.get('configPath', undefined),
       colorPreview: {
         enabled: config.get('colorPreview.enabled', true),
-      }
+      },
+      classExtraction: config.get('classExtraction', {}),
     };
 
     this._watchExtensionConfigCallbacks.forEach(cb => cb(this._extensionConfig));

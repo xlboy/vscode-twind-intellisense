@@ -40,28 +40,49 @@
   - 类型：`Array<'tailwind' | 'tailwind-forms' | 'autoprefix' | 'container-queries' | 'line-clamp' | 'radix-ui' | 'typography'>`
   - 默认值：`["tailwind"]`
     > 请注意，如果你的项目中使用了 `tailwind` 预设，请务必添加。
-
-  > `tailwind` 即为 `@twind/preset-tailwind`，其余的也是同理。
+    > `tailwind` 即为 `@twind/preset-tailwind`，其余的也是同理。
 
 - `twind-intellisense.configPath`: Twind 配置文件路径
 
   - 类型：`string | undefined`
     > 可以是配置文件的完整路径（如：`<...>/lib/twind.ts`）
-
-  > 或是包含配置文件的目录路径（如：`<...>/lib`，会自动在此目录下寻找 `twind.config.(js|ts)` 配置文件）
-
-  > 如果不填，将会在工作区文件夹中查找配置文件（如：`${workspaceFolder}/twind.config.(js|ts)`）
+    > 或是包含配置文件的目录路径（如：`<...>/lib`，会自动在此目录下寻找 `twind.config.(js|ts)` 配置文件）
+    > 如果不填，将会在工作区文件夹中查找配置文件（如：`${workspaceFolder}/twind.config.(js|ts)`）
 
 - `twind-intellisense.colorPreview`:
-  - 类型↓：
-  ```json
-  {
-    "twind-intellisense.colorPreview": {
-      // 是否启用 颜色预览 功能
-      "enabled": true
+  - 类型：`object`
+  - 属性：
+    - `enabled`:
+      - 类型：`boolean`
+      - 默认值：`true`
+      - 描述：是否启用颜色预览功能
+  - 示例：
+    ```json
+    {
+      "twind-intellisense.colorPreview": {
+        "enabled": true
+      }
     }
-  }
-  ```
+    ```
+- `twind-intellisense.classExtraction`: 提取类的相关配置
+
+  - 类型：`object`
+  - 属性：
+    - `prefixes`:
+      - 类型：`Array<string>`
+      - 描述：要提取的类前缀，参数类型为正则字符串，例如：`"class(Name)?="`
+    - `ignorePrefixes`:
+      - 类型：`Array<string>`
+      - 描述：要忽略的类前缀，参数类型为正则字符串，例如：``"css(?=`|\()"``
+  - 示例：
+    ```json
+    {
+      "twind-intellisense.classExtraction": {
+        "prefixes": ["class(Name)?="],
+        "ignorePrefixes": ["css(?=`|()"]
+      }
+    }
+    ```
 
 ## 各语言的支持情况
 

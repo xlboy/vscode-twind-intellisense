@@ -2,8 +2,7 @@
   "name": "vscode-twind-intellisense",
   "publisher": "xlboy",
   "displayName": "Twind Intellisense (Phoenix)",
-  "preview": true,
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Twind Intellisense for VSCode, It's waiting for its king to return",
   "license": "MIT",
   "type": "module",
@@ -79,6 +78,25 @@
               "description": "Enable color preview"
             }
           }
+        },
+        "twind-intellisense.classExtraction": {
+          "type": "object",
+          "properties": {
+            "prefixes": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Prefixes to extract classes, parameter type is a regex string, e.g., \"class(Name)?=\""
+            },
+            "ignorePrefixes": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Prefixes to ignore classes, parameter type is a regex string, e.g., \"css(?=`|()\""
+            }
+          }
         }
       }
     }
@@ -94,7 +112,7 @@
   },
   "devDependencies": {
     "@ctrl/tinycolor": "^4.1.0",
-    "@phoenix-twind/intellisense": "1.1.4-alpha.3",
+    "@phoenix-twind/intellisense": "1.1.4-alpha.4",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "@tsconfig/node20": "^20.1.4",
     "@twind/core": "^1.1.3",

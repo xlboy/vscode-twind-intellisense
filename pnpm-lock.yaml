@@ -32,8 +32,8 @@ importers:
         specifier: ^4.1.0
         version: 4.1.0
       '@phoenix-twind/intellisense':
-        specifier: 1.1.4-alpha.3
-        version: 1.1.4-alpha.3(patch_hash=pjf6z3fima62fbhqmzs5wo7xay)(@twind/core@1.1.3(patch_hash=2henlbu2im4bjihhetrjmhnzzm)(typescript@5.5.3))(typescript@5.5.3)
+        specifier: 1.1.4-alpha.4
+        version: 1.1.4-alpha.4(patch_hash=pjf6z3fima62fbhqmzs5wo7xay)(@twind/core@1.1.3(patch_hash=2henlbu2im4bjihhetrjmhnzzm)(typescript@5.5.3))(typescript@5.5.3)
       '@trivago/prettier-plugin-sort-imports':
         specifier: ^4.3.0
         version: 4.3.0(prettier@3.3.3)
@@ -414,8 +414,8 @@ packages:
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
 
-  '@phoenix-twind/intellisense@1.1.4-alpha.3':
-    resolution: {integrity: sha512-QHr7yh/qeNmP5+HrYF0QLu5GwlrRMyIOIG4rxnMpcxglxxrRdAMOCFLj4cMeuCeMhwKu6dRJFSOqbe7/Na7IcA==}
+  '@phoenix-twind/intellisense@1.1.4-alpha.4':
+    resolution: {integrity: sha512-5DO0ZPFzIX9bXPSG6rMQtPg57Ftg7teNFnnmBy7usTb+I+jtVrIU1UMSAWPrgJsI35N/g3LbnOumqf6xZi9IGw==}
     engines: {node: '>=14.15.0'}
     peerDependencies:
       '@twind/core': ^1.1.3
@@ -2395,7 +2395,7 @@ snapshots:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.17.1
 
-  '@phoenix-twind/intellisense@1.1.4-alpha.3(patch_hash=pjf6z3fima62fbhqmzs5wo7xay)(@twind/core@1.1.3(patch_hash=2henlbu2im4bjihhetrjmhnzzm)(typescript@5.5.3))(typescript@5.5.3)':
+  '@phoenix-twind/intellisense@1.1.4-alpha.4(patch_hash=pjf6z3fima62fbhqmzs5wo7xay)(@twind/core@1.1.3(patch_hash=2henlbu2im4bjihhetrjmhnzzm)(typescript@5.5.3))(typescript@5.5.3)':
     dependencies:
       '@ctrl/tinycolor': 3.6.1
       '@twind/core': 1.1.3(patch_hash=2henlbu2im4bjihhetrjmhnzzm)(typescript@5.5.3)
