@@ -2,8 +2,8 @@
   "name": "vscode-twind-intellisense",
   "publisher": "xlboy",
   "displayName": "Twind Intellisense (Phoenix)",
-  "version": "0.4.0",
-  "description": "Twind Intellisense for VSCode, It's waiting for its king to return",
+  "version": "0.5.0",
+  "description": "Twind@1.x Intellisense for VSCode. Enhancing your Twind development experience.",
   "license": "MIT",
   "type": "module",
   "repository": {
