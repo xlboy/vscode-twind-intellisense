@@ -1,14 +1,34 @@
-import pkg from '../.yalc/@phoenix-twind/intellisense/package.json';
 import fs from 'fs';
+import path from 'path';
 
-const clone = JSON.parse(JSON.stringify(pkg));
+const packages = ['@phoenix-twind/intellisense', '@phoenix-twind/preset-tailwind'];
 
-clone.exports = {
-  '.': {
-    types: './intellisense.d.ts',
-    default: './intellisense.dev.js',
-  },
-  './package.json': './package.json',
-};
+function patchPackage(packageName: string) {
+  const packagePath = path.resolve(process.cwd(), '.yalc', packageName, 'package.json');
+  const pkg = JSON.parse(fs.readFileSync(packagePath, 'utf-8'));
 
-fs.writeFileSync('./.yalc/@phoenix-twind/intellisense/package.json', JSON.stringify(clone, null, 2));
+  const clone = JSON.parse(JSON.stringify(pkg));
+
+  clone.exports = Object.fromEntries(
+    Object.entries(clone.exports).map(([key, value]: [string, any]) => {
+      if (typeof value === 'string') {
+        return [key, value];
+      }
+      if (typeof value === 'object' && value !== null) {
+        return [
+          key,
+          {
+            types: value.types,
+            default: value.development?.default || value.default,
+          },
+        ];
+      }
+      return [key, value];
+    }),
+  );
+
+  fs.writeFileSync(packagePath, JSON.stringify(clone, null, 2));
+  console.log(`Patched ${packageName}`);
+}
+
+packages.forEach(patchPackage);

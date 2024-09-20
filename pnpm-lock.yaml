@@ -8,6 +8,9 @@ patchedDependencies:
   '@phoenix-twind/intellisense':
     hash: pjf6z3fima62fbhqmzs5wo7xay
     path: patches/@phoenix-twind__intellisense.patch
+  '@phoenix-twind/preset-tailwind':
+    hash: 2fhwk6hkttbnhst6k46d6td3d4
+    path: patches/@phoenix-twind__preset-tailwind.patch
   '@twind/core@1.1.3':
     hash: 2henlbu2im4bjihhetrjmhnzzm
     path: patches/@twind__core@1.1.3.patch
@@ -32,8 +35,11 @@ importers:
         specifier: ^4.1.0
         version: 4.1.0
       '@phoenix-twind/intellisense':
-        specifier: 1.1.4-alpha.4
+        specifier: ^1.1.4-alpha.4
         version: 1.1.4-alpha.4(patch_hash=pjf6z3fima62fbhqmzs5wo7xay)(@twind/core@1.1.3(patch_hash=2henlbu2im4bjihhetrjmhnzzm)(typescript@5.5.3))(typescript@5.5.3)
+      '@phoenix-twind/preset-tailwind':
+        specifier: ^1.2.0-alpha.1
+        version: 1.2.0-alpha.1(patch_hash=2fhwk6hkttbnhst6k46d6td3d4)(@twind/core@1.1.3(patch_hash=2henlbu2im4bjihhetrjmhnzzm)(typescript@5.5.3))(typescript@5.5.3)
       '@trivago/prettier-plugin-sort-imports':
         specifier: ^4.3.0
         version: 4.3.0(prettier@3.3.3)
@@ -419,6 +425,16 @@ packages:
     engines: {node: '>=14.15.0'}
     peerDependencies:
       '@twind/core': ^1.1.3
+      typescript: ^5.5.3
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+
+  '@phoenix-twind/preset-tailwind@1.2.0-alpha.1':
+    resolution: {integrity: sha512-JW1i8ljWzhMA5zeJ4taEOGtpRAjUU4w32x6CcdHg9y8pNcStP5oGj/6gmbxlMvan3ZXP3/i/bgOKtXu17DbAeg==}
+    engines: {node: '>=14.15.0'}
+    peerDependencies:
+      '@twind/core': ^1.1.0
       typescript: ^5.5.3
     peerDependenciesMeta:
       typescript:
@@ -2407,6 +2423,12 @@ snapshots:
       moo: 0.5.2
       quick-lru: 6.1.2
       showdown: 2.1.0
+    optionalDependencies:
+      typescript: 5.5.3
+
+  '@phoenix-twind/preset-tailwind@1.2.0-alpha.1(patch_hash=2fhwk6hkttbnhst6k46d6td3d4)(@twind/core@1.1.3(patch_hash=2henlbu2im4bjihhetrjmhnzzm)(typescript@5.5.3))(typescript@5.5.3)':
+    dependencies:
+      '@twind/core': 1.1.3(patch_hash=2henlbu2im4bjihhetrjmhnzzm)(typescript@5.5.3)
     optionalDependencies:
       typescript: 5.5.3
 

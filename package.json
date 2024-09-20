@@ -46,6 +46,7 @@
             "type": "string",
             "enum": [
               "tailwind",
+              "phoenix-tailwind@3.4",
               "tailwind-forms",
               "autoprefix",
               "container-queries",
@@ -55,6 +56,7 @@
             ],
             "markdownEnumDescriptions": [
               "`@twind/preset-tailwind`",
+              "`@phoenix-twind/preset-tailwind`, supports the latest `tailwind@3.4`",
               "`@twind/preset-tailwind-forms`",
               "`@twind/preset-autoprefix`",
               "`@twind/preset-container-queries`",
@@ -112,7 +114,8 @@
   },
   "devDependencies": {
     "@ctrl/tinycolor": "^4.1.0",
-    "@phoenix-twind/intellisense": "1.1.4-alpha.4",
+    "@phoenix-twind/intellisense": "^1.1.4-alpha.4",
+    "@phoenix-twind/preset-tailwind": "^1.2.0-alpha.1",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "@tsconfig/node20": "^20.1.4",
     "@twind/core": "^1.1.3",
@@ -148,7 +151,8 @@
       "@twind/preset-container-queries@1.0.7": "patches/@twind__preset-container-queries@1.0.7.patch",
       "@twind/preset-line-clamp@1.0.7": "patches/@twind__preset-line-clamp@1.0.7.patch",
       "@twind/preset-typography@1.0.7": "patches/@twind__preset-typography@1.0.7.patch",
-      "@phoenix-twind/intellisense": "patches/@phoenix-twind__intellisense.patch"
+      "@phoenix-twind/intellisense": "patches/@phoenix-twind__intellisense.patch",
+      "@phoenix-twind/preset-tailwind": "patches/@phoenix-twind__preset-tailwind.patch"
     }
   }
 }

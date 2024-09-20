@@ -2,7 +2,7 @@
 
 [English](./README.md) | 简体中文
 
-<video src="https://github.com/user-attachments/assets/bc658c10-a684-4201-8960-8c00e835c912"></video>
+<video src="https://github.com/user-attachments/assets/c5d92bbd-cb25-493f-a251-c4ca664f3f3d"></video>
 
 ## 关于它
 
@@ -37,9 +37,10 @@
 
 - `twind-intellisense.presets`: 项目中使用到的预设
 
-  - 类型：`Array<'tailwind' | 'tailwind-forms' | 'autoprefix' | 'container-queries' | 'line-clamp' | 'radix-ui' | 'typography'>`
+  - 类型：`Array<'tailwind' | 'phoenix-tailwind@3.4' | 'tailwind-forms' | 'autoprefix' | 'container-queries' | 'line-clamp' | 'radix-ui' | 'typography'>`
   - 默认值：`["tailwind"]`
     > 请注意，如果你的项目中使用了 `tailwind` 预设，请务必添加。
+    > `phoenix-tailwind@3.4` 即为 `@phoenix-twind/preset-tailwind`（支持最新的 `tailwind@3.4`）
     > `tailwind` 即为 `@twind/preset-tailwind`，其余的也是同理。
 
 - `twind-intellisense.configPath`: Twind 配置文件路径

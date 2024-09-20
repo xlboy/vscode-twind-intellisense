@@ -2,7 +2,7 @@
 
 English | [简体中文](./README.zh.md)
 
-<video src="https://github.com/user-attachments/assets/bc658c10-a684-4201-8960-8c00e835c912"></video>
+<video src="https://github.com/user-attachments/assets/c5d92bbd-cb25-493f-a251-c4ca664f3f3d"></video>
 
 ## About It
 
@@ -37,10 +37,11 @@ After installing the extension, simply configure it as follows.
 
 - `twind-intellisense.presets`: Presets used in the project
 
-  - Type: `Array<'tailwind' | 'tailwind-forms' | 'autoprefix' | 'container-queries' | 'line-clamp' | 'radix-ui' | 'typography'>`
+  - Type: `Array<'tailwind' | 'phoenix-tailwind@3.4' | 'tailwind-forms' | 'autoprefix' | 'container-queries' | 'line-clamp' | 'radix-ui' | 'typography'>`
   - Default: `["tailwind"]`
 
   > Note: If your project uses the `tailwind` preset, be sure to add it.
+  > `phoenix-tailwind@3.4` corresponds to `@phoenix-twind/preset-tailwind`, supports the latest `tailwind@3.4`.
   > `tailwind` corresponds to `@twind/preset-tailwind`, and the others follow similarly.
 
 - `twind-intellisense.configPath`: Path to the Twind configuration file
