@@ -1,5 +1,6 @@
 export type TwindDefaultPreset =
   | 'tailwind'
+  | 'phoenix-tailwind@3.4'
   | 'tailwind-forms'
   | 'autoprefix'
   | 'container-queries'

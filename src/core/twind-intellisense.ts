@@ -9,6 +9,7 @@ import {
   type Suggestion,
   createIntellisense,
 } from '@phoenix-twind/intellisense';
+import presetPhoenixTailwind from '@phoenix-twind/preset-tailwind';
 import { type Preset } from '@twind/core';
 import presetAutoprefix from '@twind/preset-autoprefix';
 import presetContainerQueries from '@twind/preset-container-queries';
@@ -142,6 +143,7 @@ class TwindIntellisense {
       'tailwind-forms': presetTailwindForms(),
       autoprefix: presetAutoprefix(),
       'radix-ui': presetRadixUI(),
+      'phoenix-tailwind@3.4': presetPhoenixTailwind(),
     } satisfies Record<TwindDefaultPreset, Preset<any>>;
 
     const languageOptions = (

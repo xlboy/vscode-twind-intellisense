@@ -1,3 +1,9 @@
+# 0.5.0 (2024-09-20)
+
+## Added
+
+- Support for `phoenix-tailwind@3.4` (compatible with the latest `tailwind@3.4`)
+
 # 0.4.0 (2024-08-16)
 
 ## Added
