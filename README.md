@@ -30,62 +30,91 @@ After installing the extension, simply configure it as follows.
 
 ## Configuration
 
-- `twind-intellisense.enabled`: Enable the extension
+### `twind-intellisense.enabled`
 
-  - Type: `boolean`
-  - Default: `true`
+- Description: Enable the extension
 
-- `twind-intellisense.presets`: Presets used in the project
+- Type: `boolean`
 
-  - Type: `Array<'tailwind' | 'phoenix-tailwind@3.4' | 'tailwind-forms' | 'autoprefix' | 'container-queries' | 'line-clamp' | 'radix-ui' | 'typography'>`
-  - Default: `["tailwind"]`
+- Default: `true`
 
-  > Note: If your project uses the `tailwind` preset, be sure to add it.
-  > `phoenix-tailwind@3.4` corresponds to `@phoenix-twind/preset-tailwind`, supports the latest `tailwind@3.4`.
-  > `tailwind` corresponds to `@twind/preset-tailwind`, and the others follow similarly.
+### `twind-intellisense.presets`
 
-- `twind-intellisense.configPath`: Path to the Twind configuration file
+- Description: Presets used in the project
 
-  - Type: `string | undefined`
+- Type: `Array<'tailwind' | 'phoenix-tailwind@3.4' | 'tailwind-forms' | 'autoprefix' | 'container-queries' | 'line-clamp' | 'radix-ui' | 'typography'>`
+- Default: `["tailwind"]`
 
-  > This can be the full path to the configuration file (e.g., `<...>/twind.config.js`).
-  > or the directory containing the configuration file (e.g., `<...>`, which will automatically look for `twind.config.(js|ts)`).
-  > If not specified, the extension will look for the configuration file in the workspace folder (e.g., `${workspaceFolder}/twind.config.(js|ts)`)
+- Additional Notes:
 
-- `twind-intellisense.colorPreview`:
-  - Type: `object`
-  - Properties:
-    - `enabled`:
-      - Type: `boolean`
-      - Default: `true`
-      - Description: Whether to enable the color preview feature
-  - Example:
-    ```json
-    {
-      "twind-intellisense.colorPreview": {
-        "enabled": true
-      }
+  If your project uses the `tailwind` preset, be sure to add it.
+
+  `phoenix-tailwind@3.4` corresponds to `@phoenix-twind/preset-tailwind`, supports the latest `tailwind@3.4`.
+
+  `tailwind` corresponds to `@twind/preset-tailwind`, and the others follow similarly.
+
+### `twind-intellisense.configPath`
+
+- Description: Path to the Twind configuration file
+
+- Type: `string | undefined`
+
+- Additional Notes:
+
+  This should be specified relative to the workspace root.
+  
+  1. You can specify the full path to the configuration file, e.g., `'path/to/twind.config.js'`
+  2. You can specify the directory containing the configuration file, e.g., `'path/to/'` (it will automatically look for `twind.config.js` or `twind.config.ts` in that directory)
+  3. If not specified, it will default to looking for `'twind.config.(js|ts)'` in the workspace root directory
+
+  Additionally, even on Windows systems, always use forward slashes (`/`) as path separators
+
+### `twind-intellisense.colorPreview`
+
+- Description: Color preview configuration
+
+- Type: `object`
+
+- Properties:
+
+  - `enabled`:
+    - Description: Whether to enable the color preview feature
+    - Type: `boolean`
+    - Default: `true`
+
+- Example:
+  ```json
+  {
+    "twind-intellisense.colorPreview": {
+      "enabled": true
     }
-    ```
-- `twind-intellisense.classExtraction`: Configuration for class extraction
+  }
+  ```
 
-  - Type: `object`
-  - Properties:
-    - `prefixes`:
-      - Type: `Array<string>`
-      - Description: The prefixes of classes to extract, as regex strings. For example: `"class(Name)?="`
-    - `ignorePrefixes`:
-      - Type: `Array<string>`
-      - Description: The prefixes of classes to ignore, as regex strings. For example: ``"css(?=`|\()"``
-  - Example:
-    ```json
-    {
-      "twind-intellisense.classExtraction": {
-        "prefixes": ["class(Name)?="],
-        "ignorePrefixes": ["css(?=`|()"]
-      }
+### `twind-intellisense.classExtraction`
+
+- Description: Configuration for class extraction
+
+- Type: `object`
+
+- Properties:
+
+  - `prefixes`:
+    - Description: The prefixes of classes to extract, as regex strings. For example: `"class(Name)?="`
+    - Type: `Array<string>`
+  - `ignorePrefixes`:
+    - Description: The prefixes of classes to ignore, as regex strings. For example: ``"css(?=`|\()"``
+    - Type: `Array<string>`
+
+- Example:
+  ```json
+  {
+    "twind-intellisense.classExtraction": {
+      "prefixes": ["class(Name)?="],
+      "ignorePrefixes": ["css(?=`|()"]
     }
-    ```
+  }
+  ```
 
 ## Language Support Status
 

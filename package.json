@@ -69,7 +69,7 @@
         },
         "twind-intellisense.configPath": {
           "type": "string",
-          "markdownDescription": "Path to the Twind configuration file.\n\nThis can be the full path to the configuration file (e.g., `<...>/twind.config.js`),\n\nor the directory containing the configuration file (e.g., `<...>`, which will automatically look for `twind.config.(js|ts)`).\n\nIf not specified, the extension will look for the configuration file in the workspace folder (e.g., `${workspaceFolder}/twind.config.(js|ts)`)."
+          "markdownDescription": "**This should be specified relative to the workspace root.**\n\n1. You can specify the full path to the configuration file, e.g., `'path/to/twind.config.js'`\n\n2. You can specify the directory containing the configuration file, e.g., `'path/to/'` (it will automatically look for `twind.config.js` or `twind.config.ts` in that directory) \n\n3. If not specified, it will default to looking for `'twind.config.(js|ts)'` in the workspace root directory \n\nAdditionally, even on Windows systems, always use forward slashes (`/`) as path separators"
         },
         "twind-intellisense.colorPreview": {
           "type": "object",
