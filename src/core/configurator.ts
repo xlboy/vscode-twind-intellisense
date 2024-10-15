@@ -64,14 +64,14 @@ class Configurator {
 
         twindConfigPath = path.normalize(path.resolve(workspaceFolder, twindConfigPath));
 
-        const notExist = !fs.existsSync(twindConfigPath);
-        if (notExist) return { sources: { files: twindConfigPath } };
+        if (!fs.existsSync(twindConfigPath)) {
+          logger.warn(`Specified config path does not exist: ${twindConfigPath}`);
+          return { cwd: workspaceFolder, sources: { files: 'twind.config' } };
+        }
 
-        const isDir = fs.lstatSync(twindConfigPath).isDirectory();
-        if (isDir) return { cwd: twindConfigPath, sources: { files: 'twind.config' } };
-
-        const isValidConfig = fs.existsSync(twindConfigPath);
-        if (isValidConfig) return { sources: { files: twindConfigPath } };
+        if (fs.lstatSync(twindConfigPath).isDirectory()) {
+          return { cwd: twindConfigPath, sources: { files: 'twind.config' } };
+        }
 
         return { sources: { files: twindConfigPath } };
       })(),
@@ -90,32 +90,9 @@ class Configurator {
   };
 
   private _listenConfigFileChange() {
-    let twindConfigWatcher: vscode.FileSystemWatcher | undefined;
     vscode.workspace.onDidChangeConfiguration(() => {
       this._syncExtensionConfig();
       this._syncTwindUserConfig();
-
-      twindConfigWatcher?.dispose();
-      twindConfigWatcher = vscode.workspace.createFileSystemWatcher(
-        (() => {
-          let { configPath: twindConfigPath } = this._extensionConfig;
-          const workspaceFolder = getRootPath()!;
-
-          if (!twindConfigPath) return path.normalize(`${workspaceFolder}/twind.config.{ts,js}`);
-
-          twindConfigPath = path.normalize(path.resolve(workspaceFolder, twindConfigPath));
-
-          const notExist = !fs.existsSync(twindConfigPath);
-          if (notExist) return twindConfigPath;
-
-          const isDir = fs.lstatSync(twindConfigPath).isDirectory();
-          if (isDir) return path.normalize(`${twindConfigPath}/twind.config.{js,ts}`);
-
-          return twindConfigPath;
-        })(),
-      );
-      twindConfigWatcher.onDidChange(() => this._syncTwindUserConfig());
-      this._vscodeContext.subscriptions.push(twindConfigWatcher);
     });
   }
 }

@@ -30,33 +30,57 @@
 
 ## 配置
 
-- `twind-intellisense.enabled`: 是否启用插件
+### `twind-intellisense.enabled`
 
-  - 类型：`boolean`
-  - 默认值：`true`
+- 描述：是否启用插件
 
-- `twind-intellisense.presets`: 项目中使用到的预设
+- 类型：`boolean`
 
-  - 类型：`Array<'tailwind' | 'phoenix-tailwind@3.4' | 'tailwind-forms' | 'autoprefix' | 'container-queries' | 'line-clamp' | 'radix-ui' | 'typography'>`
-  - 默认值：`["tailwind"]`
-    > 请注意，如果你的项目中使用了 `tailwind` 预设，请务必添加。
-    > `phoenix-tailwind@3.4` 即为 `@phoenix-twind/preset-tailwind`（支持最新的 `tailwind@3.4`）
-    > `tailwind` 即为 `@twind/preset-tailwind`，其余的也是同理。
+- 默认值：`true`
 
-- `twind-intellisense.configPath`: Twind 配置文件路径
+### `twind-intellisense.presets`
 
-  - 类型：`string | undefined`
-    > 可以是配置文件的完整路径（如：`<...>/lib/twind.ts`）
-    > 或是包含配置文件的目录路径（如：`<...>/lib`，会自动在此目录下寻找 `twind.config.(js|ts)` 配置文件）
-    > 如果不填，将会在工作区文件夹中查找配置文件（如：`${workspaceFolder}/twind.config.(js|ts)`）
+- 描述：项目中使用到的预设
 
-- `twind-intellisense.colorPreview`:
-  - 类型：`object`
-  - 属性：
-    - `enabled`:
-      - 类型：`boolean`
-      - 默认值：`true`
-      - 描述：是否启用颜色预览功能
+- 类型：`Array<'tailwind' | 'phoenix-tailwind@3.4' | 'tailwind-forms' | 'autoprefix' | 'container-queries' | 'line-clamp' | 'radix-ui' | 'typography'>`
+
+- 默认值：`["tailwind"]`
+
+- 额外说明：
+
+  请注意，如果你的项目中使用了 `tailwind` 预设，请务必添加。
+
+  `phoenix-tailwind@3.4` 即为 `@phoenix-twind/preset-tailwind`（支持最新的 `tailwind@3.4`）
+
+  `tailwind` 即为 `@twind/preset-tailwind`，其余的也是同理。
+
+### `twind-intellisense.configPath`
+
+- 描述：Twind 配置文件路径
+
+- 类型：`string | undefined`
+
+- 额外说明：
+
+  该路径应相对于工作区根目录。
+
+  1. 可填配置文件的完整路径，例如：`'path/to/twind.config.js'`
+  2. 可填包含配置文件的目录路径，例如：`'path/to/'`（将自动在该目录下查找 `twind.config.js` 或 `twind.config.ts`）
+  3. 不填则默认在工作区根目录查找 `'twind.config.(js|ts)'`
+
+  另外，即使在 Windows 系统上，也请始终使用正斜杠（`/`）作为路径分隔符
+
+### `twind-intellisense.colorPreview`
+
+- 描述：颜色预览配置
+
+- 类型：`object`
+
+- 属性：
+  - `enabled`:
+    - 类型：`boolean`
+    - 默认值：`true`
+    - 描述：是否启用颜色预览功能
   - 示例：
     ```json
     {
@@ -65,16 +89,20 @@
       }
     }
     ```
-- `twind-intellisense.classExtraction`: 提取类的相关配置
 
-  - 类型：`object`
-  - 属性：
-    - `prefixes`:
-      - 类型：`Array<string>`
-      - 描述：要提取的类前缀，参数类型为正则字符串，例如：`"class(Name)?="`
-    - `ignorePrefixes`:
-      - 类型：`Array<string>`
-      - 描述：要忽略的类前缀，参数类型为正则字符串，例如：``"css(?=`|\()"``
+### `twind-intellisense.classExtraction`
+
+- 描述：提取类的相关配置
+
+- 类型：`object`
+
+- 属性：
+  - `prefixes`:
+    - 类型：`Array<string>`
+    - 描述：要提取的类前缀，参数类型为正则字符串，例如：`"class(Name)?="`
+  - `ignorePrefixes`:
+    - 类型：`Array<string>`
+    - 描述：要忽略的类前缀，参数类型为正则字符串，例如：`"css(?=`|()"`
   - 示例：
     ```json
     {
@@ -92,9 +120,9 @@
 - [x] JavaScriptReact
 - [x] TypeScript
 - [x] TypeScriptReact
-- [ ] Vue
-- [ ] Svelte
-- [ ] SolidJS
+- [x] Vue
+- [x] Svelte
+- [x] SolidJS
 - [ ] ...
 
 ## CHANGELOG

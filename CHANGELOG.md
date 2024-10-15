@@ -1,3 +1,9 @@
+# 0.6.0 (2024-10-14)
+
+## Added
+
+- Added support for Vue and Svelte frameworks
+
 # 0.5.0 (2024-09-20)
 
 ## Added

@@ -17,13 +17,16 @@ export interface ExtensionConfig {
 
   /**
    * Path to the Twind configuration file.
+   * 
+   * This should be specified relative to the workspace root.
+   * 
+   * Options:
+   * 1. Full path to the config file: e.g., `'path/to/twind.config.js'`
+   * 2. Directory containing the config file: e.g., `'path/to/'`
+   *    (will automatically look for `twind.config.js` or `twind.config.ts`)
+   * 3. Leave empty to use default: `<workspaceRoot>/twind.config.(js|ts)`
    *
-   * This can be the full path to the configuration file (e.g., `<...>/twind.config.js`),
-   *
-   * or the directory containing the configuration file (e.g., `<...>`, which will automatically look for `twind.config.(js|ts)`).
-   *
-   * If not specified, the extension will look for the configuration file in the workspace folder (e.g., `${workspaceFolder}/twind.config.(js|ts)`).
-   *
+   * Note: Always use forward slashes (`/`) for paths, even on Windows.
    */
   configPath?: string;
 

@@ -8,7 +8,15 @@ export class Controller {
   }
 
   private _registerCompletionProvider() {
-    const currentSupportedLanguages = ['html', 'typescriptreact', 'javascriptreact', 'typescript', 'javascript'];
+    const currentSupportedLanguages = [
+      'html',
+      'typescriptreact',
+      'javascriptreact',
+      'typescript',
+      'javascript',
+      'vue',
+      'svelte',
+    ];
     const completionProvider = vscode.languages.registerCompletionItemProvider(currentSupportedLanguages, {
       provideCompletionItems: twindIntellisense.suggestProvider,
     });
@@ -17,7 +25,15 @@ export class Controller {
   }
 
   private _registerHoverProvider() {
-    const currentSupportedLanguages = ['html', 'typescriptreact', 'javascriptreact', 'typescript', 'javascript'];
+    const currentSupportedLanguages = [
+      'html',
+      'typescriptreact',
+      'javascriptreact',
+      'typescript',
+      'javascript',
+      'vue',
+      'svelte',
+    ];
     const hoverProvider = vscode.languages.registerHoverProvider(currentSupportedLanguages, {
       provideHover: twindIntellisense.hoverProvider,
     });
