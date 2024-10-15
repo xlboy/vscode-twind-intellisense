@@ -35,8 +35,8 @@ importers:
         specifier: ^4.1.0
         version: 4.1.0
       '@phoenix-twind/intellisense':
-        specifier: ^1.1.4-alpha.4
-        version: 1.1.4-alpha.4(patch_hash=pjf6z3fima62fbhqmzs5wo7xay)(@twind/core@1.1.3(patch_hash=2henlbu2im4bjihhetrjmhnzzm)(typescript@5.5.3))(typescript@5.5.3)
+        specifier: ^1.1.4-alpha.5
+        version: 1.1.4-alpha.5(patch_hash=pjf6z3fima62fbhqmzs5wo7xay)(@twind/core@1.1.3(patch_hash=2henlbu2im4bjihhetrjmhnzzm)(typescript@5.5.3))(typescript@5.5.3)
       '@phoenix-twind/preset-tailwind':
         specifier: ^1.2.0-alpha.1
         version: 1.2.0-alpha.1(patch_hash=2fhwk6hkttbnhst6k46d6td3d4)(@twind/core@1.1.3(patch_hash=2henlbu2im4bjihhetrjmhnzzm)(typescript@5.5.3))(typescript@5.5.3)
@@ -420,8 +420,8 @@ packages:
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
 
-  '@phoenix-twind/intellisense@1.1.4-alpha.4':
-    resolution: {integrity: sha512-5DO0ZPFzIX9bXPSG6rMQtPg57Ftg7teNFnnmBy7usTb+I+jtVrIU1UMSAWPrgJsI35N/g3LbnOumqf6xZi9IGw==}
+  '@phoenix-twind/intellisense@1.1.4-alpha.5':
+    resolution: {integrity: sha512-pK04eZtxlkDc+cbKxoN4/dEjKkKJR1X2BCA+eijfLhTu8A5x57hwKgjRNAHYKzGwAHLg/ETRwojidgRTAERIIg==}
     engines: {node: '>=14.15.0'}
     peerDependencies:
       '@twind/core': ^1.1.3
@@ -817,8 +817,8 @@ packages:
   chownr@1.1.4:
     resolution: {integrity: sha512-jJ0bqzaylmJtVnNgzTeSOs8DPavpbYgEr/b0YL8/2GO3xJEhInFmhKMUnEJQjZumK7KXGFhUy89PrsJWlakBVg==}
 
-  class-string-matcher@0.1.0-alpha.1:
-    resolution: {integrity: sha512-uDQ9Phl4xZdTRmzeNUTSQe7krBh42rFbP6OMwp23a19OLll8jpbWtaVogtd8Q2s/zGERrKm2hX++YYXiTxX8NA==}
+  class-string-matcher@0.1.0:
+    resolution: {integrity: sha512-Unu1iUOJk8/4O+lbhs5jBIwnVPok06VbjBdZ0npS8Be8zCjTOBwv0FANImSMvlUT4VAYVm/WBk4Il8ZfgC7oIQ==}
     engines: {node: '>=20.0.0', pnpm: ^9.0.0}
     peerDependencies:
       moo: ^0.5.2
@@ -2411,11 +2411,11 @@ snapshots:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.17.1
 
-  '@phoenix-twind/intellisense@1.1.4-alpha.4(patch_hash=pjf6z3fima62fbhqmzs5wo7xay)(@twind/core@1.1.3(patch_hash=2henlbu2im4bjihhetrjmhnzzm)(typescript@5.5.3))(typescript@5.5.3)':
+  '@phoenix-twind/intellisense@1.1.4-alpha.5(patch_hash=pjf6z3fima62fbhqmzs5wo7xay)(@twind/core@1.1.3(patch_hash=2henlbu2im4bjihhetrjmhnzzm)(typescript@5.5.3))(typescript@5.5.3)':
     dependencies:
       '@ctrl/tinycolor': 3.6.1
       '@twind/core': 1.1.3(patch_hash=2henlbu2im4bjihhetrjmhnzzm)(typescript@5.5.3)
-      class-string-matcher: 0.1.0-alpha.1(moo@0.5.2)
+      class-string-matcher: 0.1.0(moo@0.5.2)
       css-tree: 2.3.1
       cssbeautify: 0.3.1
       genex: 1.1.0
@@ -2794,7 +2794,7 @@ snapshots:
   chownr@1.1.4:
     optional: true
 
-  class-string-matcher@0.1.0-alpha.1(moo@0.5.2):
+  class-string-matcher@0.1.0(moo@0.5.2):
     dependencies:
       moo: 0.5.2
 

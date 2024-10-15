@@ -123,9 +123,9 @@ After installing the extension, simply configure it as follows.
 - [x] JavaScriptReact
 - [x] TypeScript
 - [x] TypeScriptReact
-- [ ] Vue
-- [ ] Svelte
-- [ ] SolidJS
+- [x] Vue
+- [x] Svelte
+- [x] SolidJS
 - [ ] ...
 
 ## CHANGELOG

@@ -120,9 +120,9 @@
 - [x] JavaScriptReact
 - [x] TypeScript
 - [x] TypeScriptReact
-- [ ] Vue
-- [ ] Svelte
-- [ ] SolidJS
+- [x] Vue
+- [x] Svelte
+- [x] SolidJS
 - [ ] ...
 
 ## CHANGELOG
